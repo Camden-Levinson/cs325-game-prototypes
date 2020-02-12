@@ -5,8 +5,8 @@ var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload:
 
 function preload() {
 
-    //game.load.tilemap('matching', 'assets/tilemaps/maps/phaser_tiles.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('tiles', 'assets/tilemaps/tiles/phaser_tiles.png');//, 100, 100, -1, 1, 1);    
+    game.load.tilemap('matching', 'assets/phaser_tiles.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('tiles', 'assets/phaser_tiles.png');//, 100, 100, -1, 1, 1);    
 }
 
 var timeCheck = 0;
@@ -42,15 +42,15 @@ var myCountdownSeconds;
 
 function create() {
 
-        //map = game.add.tilemap('matching');
+        map = game.add.tilemap('matching');
 
-        //map.addTilesetImage('Desert', 'tiles');
+        map.addTilesetImage('Desert', 'tiles');
 
-        //tileset = game.add.tileset('tiles');
+        tileset = game.add.tileset('tiles');
     
-        //layer = map.createLayer('Ground');//.tilemapLayer(0, 0, 600, 600, tileset, map, 0);
+        layer = map.createLayer('Ground');//.tilemapLayer(0, 0, 600, 600, tileset, map, 0);
 
-        //layer.resizeWorld();
+        layer.resizeWorld();
 
         marker = game.add.graphics();
         marker.lineStyle(2, 0x00FF00, 1);

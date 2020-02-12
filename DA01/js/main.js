@@ -62,22 +62,11 @@ function make(game){
     return { "preload": preload, "create": create, "update": update };
 }
 window.onload = function() {
-        var config = {
-        type: Phaser.AUTO,
-        parent: 'game',
-        width: 800,
-        height: 600,
-        scene: {
-            preload: preload,
-            create: create,
-            update: update
-        }
-    };
     var info;
     var timer;
     var alive = 0;
 
-    var game = new Phaser.Game(config);
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
     
     game.state.add( "main", make( game ) );
     

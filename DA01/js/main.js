@@ -59,7 +59,7 @@ function make(game){
     {
         game.input.off('gameobjectup');
     }
-    return { "preload": preload, "create": create, "update": update };
+    //return { "preload": preload, "create": create, "update": update };
 }
 
 var info;

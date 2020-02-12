@@ -18,8 +18,8 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('bg', 'assets/skies/sky4.png');
-    this.load.image('crate', 'assets/sprites/crate.png');
+    this.load.image('bg', 'assets/sky4.png');
+    this.load.image('crate', 'assets/crate.png');
 }
 
 function create ()

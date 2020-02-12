@@ -14,7 +14,7 @@ function make_main_game_state( game )
     function create ()
     {
         //  How many crates can you click on in 10 seconds?
-        game.add.image(400, 300, 'bg');
+        game.add.sprite(400, 300, 'bg');
 
         //  Create a bunch of images
         for (var i = 0; i < 64; i++)
@@ -22,7 +22,7 @@ function make_main_game_state( game )
             var x = Phaser.Math.Between(0, 800);
             var y = Phaser.Math.Between(0, 600);
 
-            var box = game.add.image(x, y, 'crate');
+            var box = game.add.sprite(x, y, 'crate');
 
             //  Make them all input enabled
             box.setInteractive();

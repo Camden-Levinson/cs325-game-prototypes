@@ -61,14 +61,13 @@ function make(game){
     }
     return { "preload": preload, "create": create, "update": update };
 }
-window.onload = function() {
-    var info;
-    var timer;
-    var alive = 0;
 
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
-    
-    game.state.add( "main", make( game ) );
-    
-    game.state.start( "main" );
-};
+var info;
+var timer;
+var alive = 0;
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
+
+game.state.add( "main", make( game ) );
+
+game.state.start( "main" );

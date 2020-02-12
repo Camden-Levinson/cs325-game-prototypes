@@ -18,14 +18,14 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('bg', 'assets/sky4.png');
-    this.load.image('crate', 'assets/crate.png');
+    game.load.image('bg', 'assets/sky4.png');
+    game.load.image('crate', 'assets/crate.png');
 }
 
 function create ()
 {
     //  How many crates can you click on in 10 seconds?
-    this.add.image(400, 300, 'bg');
+    game.add.image(400, 300, 'bg');
 
     //  Create a bunch of images
     for (var i = 0; i < 64; i++)
@@ -33,28 +33,28 @@ function create ()
         var x = Phaser.Math.Between(0, 800);
         var y = Phaser.Math.Between(0, 600);
 
-        var box = this.add.image(x, y, 'crate');
+        var box = game.add.image(x, y, 'crate');
 
         //  Make them all input enabled
         box.setInteractive();
 
         //  The images will dispatch a 'clicked' event when they are clicked on
-        box.on('clicked', clickHandler, this);
+        box.on('clicked', clickHandler, game);
 
         alive++;
     }
 
-    //  If a Game Object is clicked on, this event is fired.
+    //  If a Game Object is clicked on, game event is fired.
     //  We can use it to emit the 'clicked' event on the game object itself.
-    this.input.on('gameobjectup', function (pointer, gameObject)
+    game.input.on('gameobjectup', function (pointer, gameObject)
     {
         gameObject.emit('clicked', gameObject);
-    }, this);
+    }, game);
 
     //  Display the game stats
-    info = this.add.text(10, 10, '', { font: '48px Arial', fill: '#000000' });
+    info = game.add.text(10, 10, '', { font: '48px Arial', fill: '#000000' });
 
-    timer = this.time.addEvent({ delay: 10000, callback: gameOver, callbackScope: this });
+    timer = game.time.addEvent({ delay: 10000, callback: gameOver, callbackScope: game });
 }
 
 function update ()
@@ -73,5 +73,5 @@ function clickHandler (box)
 
 function gameOver ()
 {
-    this.input.off('gameobjectup');
+    game.input.off('gameobjectup');
 }

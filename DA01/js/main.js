@@ -2,6 +2,9 @@
 
 function make_main_game_state( game )
 {
+    var info;
+    var timer;
+    var alive = 0;
     function preload ()
     {
         game.load.image('bg', 'assets/skies/sky4.png');

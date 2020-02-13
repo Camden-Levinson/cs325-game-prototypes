@@ -7,8 +7,8 @@ function make_main_game_state( game )
     var alive = 0;
     function preload ()
     {
-        game.load.image('bg', 'assets/skies/sky4.png');
-        game.load.image('crate', 'assets/sprites/crate.png');
+        game.load.image('bg', 'assets/sky4.png');
+        game.load.image('crate', 'assets/crate.png');
     }
 
     function create ()

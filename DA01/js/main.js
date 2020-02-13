@@ -29,21 +29,20 @@ function create ()
     this.add.sprite(400, 300, 'bg');
 
     //  Create a bunch of images
-    for (var i = 0; i < 64; i++)
-    {
-        var x = Phaser.Math.Between(0, 800);
-        var y = Phaser.Math.Between(0, 600);
+    //for (var i = 0; i < 64; i++)
+    //{
+    var x = Phaser.Math.Between(0, 800);
+    var y = Phaser.Math.Between(0, 600);
 
-        var box = this.add.sprite(x, y, 'crate');
+    var box = this.add.sprite(x, y, 'crate');
 
-        //  Make them all input enabled
-        box.setInteractive();
+    //  Make them all input enabled
+    box.setInteractive();
 
-        //  The images will dispatch a 'clicked' event when they are clicked on
-        box.on('clicked', clickHandler, this);
+    //  The images will dispatch a 'clicked' event when they are clicked on
+    box.on('clicked', clickHandler, this);
 
-        alive++;
-    }
+    //}
 
     //  If a Game Object is clicked on, this event is fired.
     //  We can use it to emit the 'clicked' event on the game object itself.
@@ -60,16 +59,27 @@ function create ()
 
 function update ()
 {
-    info.setText('Alive: ' + alive + '\nTime: ' + Math.floor(10000 - timer.getElapsed()));
+    info.setText('Points: ' + alive + '\nTime: ' + Math.floor(10000 - timer.getElapsed()));
 }
 
 function clickHandler (box)
 {
-    alive--;
+    alive++;
 
     box.off('clicked', clickHandler);
     box.input.enabled = false;
     box.setVisible(false);
+    var x = Phaser.Math.Between(0, 800);
+    var y = Phaser.Math.Between(0, 600);
+
+    var box = this.add.sprite(x, y, 'crate');
+
+    //  Make them all input enabled
+    box.setInteractive();
+
+    //  The images will dispatch a 'clicked' event when they are clicked on
+    box.on('clicked', clickHandler, this);
+
 }
 
 function gameOver ()

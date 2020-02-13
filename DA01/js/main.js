@@ -14,7 +14,7 @@ function make_main_game_state( game )
     function create ()
     {
         //  How many crates can you click on in 10 seconds?
-        game.add.sprite(400, 300, 'bg');
+        game.add.image(400, 300, 'bg');
 
         //  Create a bunch of images
         /*for (var i = 0; i < 64; i++)

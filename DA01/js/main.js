@@ -17,7 +17,7 @@ function make_main_game_state( game )
         game.add.sprite(400, 300, 'bg');
 
         //  Create a bunch of images
-        for (var i = 0; i < 64; i++)
+        /*for (var i = 0; i < 64; i++)
         {
             var x = Phaser.Math.Between(0, 800);
             var y = Phaser.Math.Between(0, 600);
@@ -43,15 +43,15 @@ function make_main_game_state( game )
         //  Display the game stats
         info = game.add.text(10, 10, '', { font: '48px Arial', fill: '#000000' });
 
-        timer = game.time.addEvent({ delay: 10000, callback: gameOver, callbackScope: game });
+        timer = game.time.addEvent({ delay: 10000, callback: gameOver, callbackScope: game });*/
     }
 
     function update ()
     {
-        info.setText('Alive: ' + alive + '\nTime: ' + Math.floor(10000 - timer.getElapsed()));
+        //info.setText('Alive: ' + alive + '\nTime: ' + Math.floor(10000 - timer.getElapsed()));
     }
 
-    function clickHandler (box)
+    /*function clickHandler (box)
     {
         alive--;
 
@@ -63,7 +63,7 @@ function make_main_game_state( game )
     function gameOver ()
     {
         game.input.off('gameobjectup');
-    }
+    }*/
     
     return { "preload": preload, "create": create, "update": update };
 }

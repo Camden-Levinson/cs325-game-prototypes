@@ -26,7 +26,7 @@ function preload ()
 function create ()
 {
     //  How many crates can you click on in 10 seconds?
-    sky = this.add.sprite(this.width, this.height, 'bg');
+    this.add.sprite(300, 400, 'bg');
 
     //  Create a bunch of images
     for (var i = 0; i < 64; i++)

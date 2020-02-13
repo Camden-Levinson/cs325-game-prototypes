@@ -20,7 +20,7 @@ var sky;
 function preload ()
 {
     this.load.image('bg', 'assets/sky4.png');
-    this.load.image('crate', '../assets/Charge.gif');
+    this.load.image('crate', 'assets/crate.png');
 }
 
 function create ()

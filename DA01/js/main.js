@@ -51,7 +51,7 @@ function make_main_game_state( game )
         info.setText('Alive: ' + alive + '\nTime: ' + Math.floor(10000 - timer.getElapsed()));
     }
 
-    /*function clickHandler (box)
+    function clickHandler (box)
     {
         alive--;
 
@@ -63,7 +63,7 @@ function make_main_game_state( game )
     function gameOver ()
     {
         game.input.off('gameobjectup');
-    }*/
+    }
     
     return { "preload": preload, "create": create, "update": update };
 }

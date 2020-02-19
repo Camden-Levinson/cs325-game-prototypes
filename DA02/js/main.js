@@ -10,10 +10,9 @@ var config = {
     }
 };
 
-var group;
-var x;
-var y;
-var move = 0;
+var follower;
+var path;
+var graphics;
 
 var game = new Phaser.Game(config);
 
@@ -26,35 +25,44 @@ function create ()
 {
     this.add.sprite(400, 300, 'ghost');
 
-    group = this.add.group({key: 'ghost', frameQuantity: 1});
-    /*this.input.on('pointermove', function (pointer) {
+    graphics = this.add.graphics();
 
-        x = pointer.x;
-        y = pointer.y;
+    follower = { t: 0, vec: new Phaser.Math.Vector2() };
 
-    });*/
+    //  The curves do not have to be joined
+    var line1 = new Phaser.Curves.Line([ 100, 100, 700, 100 ]);
+    var line2 = new Phaser.Curves.Line([ 700, 100, 700, 500 ]);
+    var line3 = new Phaser.Curves.Line([ 700, 500, 100, 500 ]);
+    var line4 = new Phaser.Curves.Line([ 100, 500, 100, 100 ]);
 
-    //  Display the game stats
-    //info = this.add.text(10, 10, '', { font: '48px Arial', fill: '#FFFFFF' });
+    path = this.add.path();
 
-    //timer = this.time.addEvent({ delay: 10000, callback: gameOver, callbackScope: this });
+    // path = new Phaser.Curves.Path();
+
+    path.add(line1);
+    path.add(line2);
+    path.add(line3);
+    path.add(line4);
+
+    this.tweens.add({
+        targets: follower,
+        t: 1,
+        ease: 'Linear',
+        duration: 4000,
+        yoyo: false,
+        repeat: -1
+    });
 }
 
 function update ()
 {
-    //info.setText('Points: ' + alive + '\nTime: ' + Math.floor(10000 - timer.getElapsed()));
-    /*while(true){
-        Phaser.Actions.ShiftPosition(group.getChildren(), 100, 100);
-        Phaser.Actions.ShiftPosition(group.getChildren(), 700, 100);
-        Phaser.Actions.ShiftPosition(group.getChildren(), 700, 500);
-        Phaser.Actions.ShiftPosition(group.getChildren(), 100, 500);
-    }*/
-    /*move += delta;
+    graphics.clear();
+    graphics.lineStyle(2, 0xffffff, 1);
 
-    if (move > 6)
-    {
-        Phaser.Actions.ShiftPosition(group.getChildren(), x, y);
-        move = 0;
-    }*/
+    //path.draw(graphics);
+
+    path.getPoint(follower.t, follower.vec);
+    graphics.fillStyle(0xff0000, 1);
+    graphics.fillRect(follower.vec.x - 8, follower.vec.y - 8, 16, 16);
 }
 

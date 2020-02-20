@@ -52,17 +52,24 @@ function create ()
         yoyo: false,
         repeat: -1
     });
+    var player = this.add.sprite(400, 300, 'ghost');
+    this.cursors = this.input.keyboard.createCursorKeys();
 }
 
 function update ()
 {
-    graphics.clear();
+    /*graphics.clear();
     graphics.lineStyle(2, 0xffffff, 1);
 
     //path.draw(graphics);
 
     path.getPoint(follower.t, follower.vec);
     graphics.fillStyle(0xff0000, 1);
-    graphics.fillRect(follower.vec.x - 8, follower.vec.y - 8, 16, 16);
+    graphics.fillRect(follower.vec.x - 8, follower.vec.y - 8, 16, 16);*/
+    var cursors = this.cursors;
+    var player = this.player;
+    if(cursors.left.isDown){
+        player.x = 300;
+    }
 }
 

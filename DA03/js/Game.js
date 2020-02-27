@@ -15,13 +15,20 @@ GameStates.makeGame = function( game, shared ) {
     }
     
     return {
-    
-        //var GameScene = new Phaser.Class({
 
-        /*game.player = null;
-        game.cursors = null;
-        game.score = 0;
-        game.scoreText = null;*/
+        Extends: Phaser.Scene,
+
+        initialize:
+
+        function GameScene ()
+        {
+            Phaser.Scene.call(game, { key: 'gameScene', active: true });
+
+            game.player = null;
+            game.cursors = null;
+            game.score = 0;
+            game.scoreText = null;
+        },
 
         create: function ()
         {
@@ -121,8 +128,5 @@ GameStates.makeGame = function( game, shared ) {
             game.score += 10;
             game.scoreText.setText('Score: ' + game.score);
         }
-
-        //});
     };
-
 };

@@ -17,11 +17,26 @@ class Game extends Phaser.Scene{
     }
 
     create() {
+        this.gameOver = false;
 
-        this.guy = this.add.image(400, 500, 'guy');
+        this.cameras.main.setBounds(0, 0, 800, 600);
+
+        this.guy = this.physics.add.sprite(400, 500, 'guy');
+        this.guy.setCollideWorldBounds(true);
+        this.guy.setSize(32, 73);
+        this.guy.setScale(2);
+
+        this.cursorKeys = this.input.keyboard.createCursorKeys();
+        this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     update() {
+        //if (this.player.y < 400) {
+        //    this.winGame();
+       // }
+        if(!this.gameOver){
+            this.playerMovementManager();
+        }
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
         
@@ -31,6 +46,31 @@ class Game extends Phaser.Scene{
         // This function returns the rotation angle that makes it visually match its
         // new trajectory.
         
+    }
+    playerMovementManager() {
+        // Directional movement
+        if (this.cursorKeys.left.isDown) {
+            this.guy.x -= 1;
+            //this.guy.setVelocityX(-this.gameSettings.playerSpeed);
+            //this.guy.anims.play("player_left", true);
+        }
+        else if (this.cursorKeys.right.isDown) {
+            this.guy.x += 1;
+            //this.guy.anims.play("player_right", true);
+        }
+        else if (this.cursorKeys.up.isDown){
+            this.guy.y += 1;
+        }
+        else if (this.cursorKeys.down.isDown){
+            this.guy.y -= 1;
+        }
+        else {
+            this.guy.setVelocityX(0);
+            //this.guy.anims.play("player_idle", true);
+        }
+        if (this.jumpKey.isDown) {
+            this.guy.setVelocityY(gameSettings.playerJumpVelocity);
+        }
     }
 }
 //export default Game;

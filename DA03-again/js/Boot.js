@@ -44,6 +44,24 @@ class Boot extends Phaser.Scene{
         //  By this point the preloader assets have loaded to the cache, we've set the this settings
         //  So now let's start the real preloader going
         this.scene.start('Preloader');
+        this.anims.create({
+            key: "player_idle",
+            //frames: [ { key: 'guy', frame: 0} ],
+            //frameRate: 10,
+            //repeat: -1
+        });
+        this.anims.create({
+            key: "player_left",
+            frames: [ { key: 'guy', frame: 1} ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "player_right",
+            frames: [ { key: 'guy', frame: 2 } ],
+            frameRate: 20,
+            repeat: -1
+        });
 
     }
 }

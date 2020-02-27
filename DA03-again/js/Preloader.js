@@ -2,9 +2,9 @@
 
 class Preloader extends Phaser.Scene{
 
-    //contructor(){
-    //    super('preloader');
-    //}
+    constructor(){
+        super('preloader');
+    }
 
 
     preload() {

@@ -13,7 +13,7 @@ var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game' );
 // An object for shared variables, so that them main menu can show
 // the high score if you want.
 
-game.scene.add( 'boot', new Boot() );
+game.scene.add( 'Boot', new Boot());
 game.scene.add( 'preloader', new Preloader() );
 game.scene.add( 'mainmenu', new MainMenu() );
 game.scene.add( 'game', new Game() );

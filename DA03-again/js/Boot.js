@@ -2,9 +2,9 @@
 
 class Boot extends Phaser.Scene{
 
-    //contructor(){
-      //  super('boot');
-    //}
+    constructor(){
+        super('boot');
+    }
 
     init() {
 

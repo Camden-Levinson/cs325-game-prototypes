@@ -2,9 +2,9 @@
 
 class Game extends Phaser.Scene{
 
-    //contructor(){
-    //    super('game');
-    //}
+    constructor(){
+        super('game');
+    }
     
     quitGame() {
 

@@ -26,7 +26,8 @@ class MainMenu extends Phaser.Scene {
         music.play();
 
         this.add.sprite(400, 300, 'titlePage');
-        var playButton = this.add.text( 400, 500, 'Start Game');
+        this.add.text(50, 50, '   Cat \nRescue', { font: '48px Arial', fill: '#000000' });
+        var playButton = this.add.text( 600, 500, 'Start Game', { font: '18px Arial', fill: '#000000' });
         playButton.setInteractive();
         playButton.on('pointerdown', () => this.startGame(music));
 

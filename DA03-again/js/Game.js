@@ -95,7 +95,7 @@ class Game extends Phaser.Scene{
         this.guy.setVisible(false);
         this.cat.setVisible(false);
         if(!this.win){
-            this.add.text(400, 300, 'YOU FAILED TO GET ALL YOUR CATS', { font: '12px Arial', fill: '#FFFFFF' });
+            this.add.text(200, 200, 'YOU FAILED TO GET ALL YOUR CATS', { font: '24px Arial', fill: '#FFFFFF' });
         }
         if(this.timer2.getElapsed() >= 30000){
             this.scene.start('MainMenu');
@@ -107,7 +107,7 @@ class Game extends Phaser.Scene{
         this.timeInfo.setVisible(false);
         this.guy.setVisible(false);
         this.cat.setVisible(false);
-        this.add.text(400, 300, 'YOU RESCUED ALL YOUR CATS', { font: '12px Arial', fill: '#FFFFFF' });
+        this.add.text(200, 200, 'YOU RESCUED ALL YOUR CATS', { font: '24px Arial', fill: '#FFFFFF' });
     }
 }
 //export default Game;

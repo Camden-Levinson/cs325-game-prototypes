@@ -19,8 +19,14 @@ class Game extends Phaser.Scene{
     create() {
         this.numCat = 0;
         this.gameOver = false;
+        this.win = false;
 
-        info = this.add.text(400, 300, '', { font: '48px Arial', fill: '#FFFFFF' })
+        this.info = this.add.text(400, 300, 'Number of Cats you have = ' + this.numCat, { font: '12px Arial', fill: '#FFFFFF' });
+
+        this.timer = this.time.addEvent({ delay: 20000, callback: this.gameOver, callbackScope: this });
+        this.timer2 = this.time.addEvent({ delay: 30000, callback: this.gameOver, callbackScope: this });
+
+        this.timeInfo = this.add.text(400, 350, 'Timer: ' + 20 + ' seconds', { font: '12px Arial', fill: '#FFFFFF' });
 
         this.cameras.main.setBounds(0, 0, 800, 600);
 
@@ -29,23 +35,28 @@ class Game extends Phaser.Scene{
         this.guy.setSize(32, 73);
         this.guy.setScale(2);
 
-        this.cat = this.physics.add.sprite(Phaser.Math.Between(0, 800), 0);
+        this.cat = this.physics.add.sprite(Phaser.Math.Between(300, 500), 0, 'cat');
+        this.cat.setCollideWorldBounds(true);
+
+        //this.add.sprite(400, 300, 'tree');
 
         this.cursorKeys = this.input.keyboard.createCursorKeys();
-        this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        this.guy.add.collider(this.player, this.platforms);
-        this.physics.add.overlap(this.cat, this.player, this.newCat, null, this);
+        this.physics.add.collider(this.guy, this.cat);
+        this.physics.add.overlap(this.cat, this.guy, this.newCat, null, this);
     }
 
     update() {
-        //if (this.player.y < 400) {
-        //    this.winGame();
-       // }
+        if (this.numCat == 15 && this.timer.getElapsed() < 20000) {
+            this.winGame();
+        }
+        else if(this.timer.getElapsed() >= 20000){
+            this.gameDone();
+        }
         if(!this.gameOver){
             this.playerMovementManager();
+        this.timeInfo.setText("Timer: " + Math.round(20000-this.timer.getElapsed())/1000 + " seconds");
         }
-        info.setText('Number of Cats you have = ' + this.numCat);
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
         
         // Accelerate the 'logo' sprite towards the cursor,
@@ -73,8 +84,30 @@ class Game extends Phaser.Scene{
     }
     newCat(){
         this.numCat += 1;
+        this.info.setText("Number of Cats you have = " + this.numCat);
         this.cat.x = Phaser.Math.Between(0, 800);
         this.cat.y = 0;
+    }
+    gameDone(){
+        this.gameOver = true;
+        this.info.setVisible(false);
+        this.timeInfo.setVisible(false);
+        this.guy.setVisible(false);
+        this.cat.setVisible(false);
+        if(!this.win){
+            this.add.text(400, 300, 'YOU FAILED TO GET ALL YOUR CATS', { font: '12px Arial', fill: '#FFFFFF' });
+        }
+        if(this.timer2.getElapsed() >= 30000){
+            this.scene.start('MainMenu');
+        }
+    }
+    winGame(){
+        this.win = true;
+        this.info.setVisible(false);
+        this.timeInfo.setVisible(false);
+        this.guy.setVisible(false);
+        this.cat.setVisible(false);
+        this.add.text(400, 300, 'YOU RESCUED ALL YOUR CATS', { font: '12px Arial', fill: '#FFFFFF' });
     }
 }
 //export default Game;

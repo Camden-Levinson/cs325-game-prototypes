@@ -27,6 +27,7 @@ class Preloader extends Phaser.Scene{
         //  + lots of other required assets here
         this.load.image( 'guy', 'assets/guy.jpg' );
         this.load.image('cat', 'assets/cat.png');
+        this.load.image('tree', 'assets/images.jpg')
     }
 
     create() {

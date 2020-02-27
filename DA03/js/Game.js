@@ -132,5 +132,6 @@ GameStates.makeGame = function( game, shared ) {
             }
 
         });
+    }
 
 };

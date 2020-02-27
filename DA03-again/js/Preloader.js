@@ -26,14 +26,14 @@ class Preloader extends Phaser.Scene{
         this.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
         //  + lots of other required assets here
         this.load.image( 'logo', 'assets/phaser.png' );
-    },
+    }
 
     create() {
 
         //  Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes
         this.preloadBar.cropEnabled = false;
 
-    },
+    }
 
     update() {
 

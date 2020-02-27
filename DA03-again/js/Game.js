@@ -40,7 +40,7 @@ class Game extends Phaser.Scene{
         // When you click on the sprite, you go back to the MainMenu.
         bouncy.inputEnabled = true;
         bouncy.events.onInputDown.add( function() { quitGame(); }, this );
-    },
+    }
 
     update() {
 

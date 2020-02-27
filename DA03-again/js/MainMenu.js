@@ -29,7 +29,7 @@ class MainMenu extends Phaser.Scene {
 
         playButton = this.add.button( 303, 400, 'playButton', startGame, null, 'over', 'out', 'down');
 
-    },
+    }
 
     update() {
 

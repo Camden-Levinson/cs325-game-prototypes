@@ -18,7 +18,7 @@ class Game extends Phaser.Scene{
 
     create() {
 
-        this.guy = this.add.sprite(400, 500);
+        this.guy = this.add.image(400, 500, 'guy');
     }
 
     update() {

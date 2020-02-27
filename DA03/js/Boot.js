@@ -5,7 +5,7 @@ var GameScene1 = new Phaser.Class({
 
     Extends: Phaser.Scene
 
-    init: function () {
+    initialize: function () {
 
         //  Unless you specifically know your game needs to support multi-touch I would recommend setting this to 1
         game.input.maxPointers = 1;

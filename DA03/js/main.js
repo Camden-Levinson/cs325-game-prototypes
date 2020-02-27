@@ -1,45 +1,146 @@
 "use strict";
-
-window.onload = function() {
-	var GameScene = new Phaser.Scene('game');
-	var config = {
-        type: Phaser.AUTO,
-        scale: {
-            mode: Phaser.Scale,
-            parent: 'game',
-            autoCenter: Phaser.Scale.CENTER_BOTH,
-            width: 800,
-            height: 600
-        },
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 300 },
-                debug: false
-            }
-        },
-        scene: GameScene
-    };
-
-
-	//	Create your Phaser game and inject it into the 'game' div.
-	//	We did it in a window.onload event, but you can do it anywhere (requireJS load, anonymous function, jQuery dom ready, - whatever floats your boat)
-	var game = new Phaser.Game(config);
-
-	//	Add the States your game has.
-	//	You don't have to do this in the html, it could be done in your Boot state too, but for simplicity I'll keep it here.
-	
-	// An object for shared variables, so that them main menu can show
-	// the high score if you want.
-	var shared = {};
-
-	//game.state.add( 'Boot', GameStates.makeBoot( game ) );
-	Phaser.Scene.call(game, {key:'GameScene1'})
-	game.state.add( 'Preloader', GameStates.makePreloader( game ) );
-	game.state.add( 'MainMenu', GameStates.makeMainMenu( game, shared ) );
-	game.state.add( 'Game', GameStates.makeGame( game, shared ) );
-
-	//	Now start the Boot state.
-	game.state.start('Boot');
-
+var config = {
+    type: Phaser.AUTO,
+    scale: {
+        mode: Phaser.Scale,
+        parent: 'game',
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 800,
+        height: 600
+    },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+    scene: GameScene
 };
+var game = new Phaser.Game(config);
+
+var GameScene1 = new Phaser.Class({
+
+    Extends: Phaser.Scene
+
+    initialize:
+
+    function GameScene ()
+    {
+        Phaser.Scene.call(game, { key: 'gameScene', active: true });
+
+        game.player = null;
+        game.cursors = null;
+        game.score = 0;
+        game.scoreText = null;
+    },
+    
+    preload: function ()
+    {
+        game.load.image('sky', 'assets/sky.png');
+        game.load.image('ground', 'assets/platform.png');
+        game.load.image('star', 'assets/star.png');
+        game.load.image('bomb', 'assets/bomb.png');
+        game.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+    },
+
+
+    create: function ()
+    {
+        game.add.image(400, 300, 'sky');
+
+        var platforms = game.physics.add.staticGroup();
+
+        platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+
+        platforms.create(600, 400, 'ground');
+        platforms.create(50, 250, 'ground');
+        platforms.create(750, 220, 'ground');
+
+        var player = game.physics.add.sprite(100, 450, 'dude');
+
+        player.setBounce(0.2);
+        player.setCollideWorldBounds(true);
+
+        game.anims.create({
+            key: 'left',
+            frames: game.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        game.anims.create({
+            key: 'turn',
+            frames: [ { key: 'dude', frame: 4 } ],
+            frameRate: 20
+        });
+
+        game.anims.create({
+            key: 'right',
+            frames: game.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        game.cursors = game.input.keyboard.createCursorKeys();
+
+        var stars = game.physics.add.group({
+            key: 'star',
+            repeat: 11,
+            setXY: { x: 12, y: 0, stepX: 70 }
+        });
+
+        stars.children.iterate(function (child) {
+
+            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+
+        });
+
+        game.scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
+        game.physics.add.collider(player, platforms);
+        game.physics.add.collider(stars, platforms);
+
+        game.physics.add.overlap(player, stars, game.collectStar, null, game);
+
+        game.player = player;
+    },
+
+    update: function ()
+    {
+        var cursors = game.cursors;
+        var player = game.player;
+
+        if (cursors.left.isDown)
+        {
+            player.setVelocityX(-160);
+
+            player.anims.play('left', true);
+        }
+        else if (cursors.right.isDown)
+        {
+            player.setVelocityX(160);
+
+            player.anims.play('right', true);
+        }
+        else
+        {
+            player.setVelocityX(0);
+
+            player.anims.play('turn');
+        }
+
+        if (cursors.up.isDown && player.body.touching.down)
+        {
+            player.setVelocityY(-330);
+        }
+    },
+
+    collectStar: function (player, star)
+    {
+        star.disableBody(true, true);
+
+        game.score += 10;
+        game.scoreText.setText('Score: ' + game.score);
+    }
+});

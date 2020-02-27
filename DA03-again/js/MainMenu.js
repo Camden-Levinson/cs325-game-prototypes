@@ -6,7 +6,7 @@ class MainMenu extends Phaser.Scene {
         super('MainMenu');
     }
     
-    startGame(pointer) {
+    startGame(music) {
 
         //	Ok, the Play Button has been clicked or touched, so let's stop the music (otherwise it'll carry on playing)
         music.stop();
@@ -22,12 +22,14 @@ class MainMenu extends Phaser.Scene {
         //	Here all we're doing is playing some music and adding a picture and button
         //	Naturally I expect you to do something significantly better :)
 
-        music = this.add.audio('titleMusic');
+        var music = this.sound.add('titleMusic');
         music.play();
 
-        this.add.sprite(0, 0, 'titlePage');
+        this.add.sprite(400, 300, 'titlePage');
 
-        playButton = this.add.button( 303, 400, 'playButton', startGame, null, 'over', 'out', 'down');
+        var playButton = this.add.text( 303, 400, 'Start');
+        playButton.setInteractive();
+        playButton.on('pointerdown', () => this.startGame(music));
 
     }
 

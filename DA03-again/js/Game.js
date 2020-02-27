@@ -30,7 +30,7 @@ class Game extends Phaser.Scene{
         // in X or Y.
         // This function returns the rotation angle that makes it visually match its
         // new trajectory.
-        bouncy.rotation = this.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
+        
     }
 }
 //export default Game;

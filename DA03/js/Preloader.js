@@ -27,11 +27,11 @@ GameStates.makePreloader = function( game ) {
             game.load.atlas('playButton', 'assets/play_button.png', 'assets/play_button.json');
             game.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
             //	+ lots of other required assets here
-            game.load.image('sky', 'src/games/firstgame/assets/sky.png');
-            game.load.image('ground', 'src/games/firstgame/assets/platform.png');
-            game.load.image('star', 'src/games/firstgame/assets/star.png');
-            game.load.image('bomb', 'src/games/firstgame/assets/bomb.png');
-            game.load.spritesheet('dude', 'src/games/firstgame/assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+            game.load.image('sky', 'assets/sky.png');
+            game.load.image('ground', 'assets/platform.png');
+            game.load.image('star', 'assets/star.png');
+            game.load.image('bomb', 'assets/bomb.png');
+            game.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
         },
     
         create: function () {

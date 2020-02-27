@@ -17,7 +17,10 @@ class Game extends Phaser.Scene{
     }
 
     create() {
+        this.numCat = 0;
         this.gameOver = false;
+
+        info = this.add.text(400, 300, '', { font: '48px Arial', fill: '#FFFFFF' })
 
         this.cameras.main.setBounds(0, 0, 800, 600);
 
@@ -26,8 +29,13 @@ class Game extends Phaser.Scene{
         this.guy.setSize(32, 73);
         this.guy.setScale(2);
 
+        this.cat = this.physics.add.sprite(Phaser.Math.Between(0, 800), 0);
+
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+        this.guy.add.collider(this.player, this.platforms);
+        this.physics.add.overlap(this.cat, this.player, this.newCat, null, this);
     }
 
     update() {
@@ -37,7 +45,7 @@ class Game extends Phaser.Scene{
         if(!this.gameOver){
             this.playerMovementManager();
         }
-
+        info.setText('Number of Cats you have = ' + this.numCat);
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
         
         // Accelerate the 'logo' sprite towards the cursor,
@@ -50,27 +58,23 @@ class Game extends Phaser.Scene{
     playerMovementManager() {
         // Directional movement
         if (this.cursorKeys.left.isDown) {
-            this.guy.x -= 1;
+            this.guy.x -= 4;
             //this.guy.setVelocityX(-this.gameSettings.playerSpeed);
             //this.guy.anims.play("player_left", true);
         }
         else if (this.cursorKeys.right.isDown) {
-            this.guy.x += 1;
+            this.guy.x += 4;
             //this.guy.anims.play("player_right", true);
-        }
-        else if (this.cursorKeys.up.isDown){
-            this.guy.y += 1;
-        }
-        else if (this.cursorKeys.down.isDown){
-            this.guy.y -= 1;
         }
         else {
             this.guy.setVelocityX(0);
             //this.guy.anims.play("player_idle", true);
         }
-        if (this.jumpKey.isDown) {
-            this.guy.setVelocityY(gameSettings.playerJumpVelocity);
-        }
+    }
+    newCat(){
+        this.numCat += 1;
+        this.cat.x = Phaser.Math.Between(0, 800);
+        this.cat.y = 0;
     }
 }
 //export default Game;

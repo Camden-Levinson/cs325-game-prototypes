@@ -1,4 +1,3 @@
-"use strict";
 var config = {
     type: Phaser.AUTO,
     scale: {
@@ -19,9 +18,9 @@ var config = {
 };
 var game = new Phaser.Game(config);
 
-var GameScene1 = new Phaser.Class({
+var GameScene = new Phaser.Class({
 
-    Extends: Phaser.Scene
+    Extends: Phaser.Scene,
 
     initialize:
 

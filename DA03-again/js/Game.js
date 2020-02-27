@@ -2,9 +2,9 @@
 
 class Game extends Phaser.Scene{
 
-    contructor(){
-        super('game');
-    }
+    //contructor(){
+    //    super('game');
+    //}
     
     quitGame() {
 
@@ -54,4 +54,4 @@ class Game extends Phaser.Scene{
         bouncy.rotation = this.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
     }
 }
-export default Game;
+//export default Game;

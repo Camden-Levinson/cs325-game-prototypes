@@ -2,9 +2,9 @@
 
 class Preloader extends Phaser.Scene{
 
-    contructor(){
-        super('preloader');
-    }
+    //contructor(){
+    //    super('preloader');
+    //}
 
 
     preload() {
@@ -21,7 +21,7 @@ class Preloader extends Phaser.Scene{
 
         //  Here we load the rest of the assets our game needs.
         //  As this is just a Project Template I've not provided these assets, swap them for your own.
-        this..load.image('titlePage', 'assets/title.png');
+        this.load.image('titlePage', 'assets/title.png');
         this.load.atlas('playButton', 'assets/play_button.png', 'assets/play_button.json');
         this.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
         //  + lots of other required assets here
@@ -55,4 +55,4 @@ class Preloader extends Phaser.Scene{
     }
 
 }
-export default Preloader;
+//export default Preloader;

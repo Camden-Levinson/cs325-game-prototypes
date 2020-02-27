@@ -2,9 +2,9 @@
 
 class Boot extends Phaser.Scene{
 
-    contructor(){
-        super('boot');
-    }
+    //contructor(){
+      //  super('boot');
+    //}
 
     init() {
 
@@ -47,4 +47,4 @@ class Boot extends Phaser.Scene{
 
     }
 }
-export deafult Boot;
+//export default Boot;

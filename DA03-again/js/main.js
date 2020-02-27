@@ -5,7 +5,23 @@
 
 //	Create your Phaser game and inject it into the 'game' div.
 //	We did it in a window.onload event, but you can do it anywhere (requireJS load, anonymous function, jQuery dom ready, - whatever floats your boat)
-var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game' );
+var config = {
+    width: 800,
+    height: 600,
+    parent: 'game',
+    backgroundColor: 0x000000,
+    pixelArt: true,
+    physics: {
+        default: "arcade",
+        arcade: {
+            debug: true,
+            gravity: { y: 1000 },
+            overlapBias: 8
+        }
+    }
+}
+
+var game = new Phaser.Game(config);
 
 //	Add the States your game has.
 //	You don't have to do this in the html, it could be done in your Boot state too, but for simplicity I'll keep it here.
@@ -14,9 +30,9 @@ var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game' );
 // the high score if you want.
 
 game.scene.add( 'Boot', new Boot());
-game.scene.add( 'preloader', new Preloader() );
-game.scene.add( 'mainmenu', new MainMenu() );
-game.scene.add( 'game', new Game() );
+game.scene.add( 'Preloader', new Preloader() );
+game.scene.add( 'MainMenu', new MainMenu() );
+game.scene.add( 'Game', new Game() );
 
 //	Now start the Boot state.
 game.scene.start('Boot');

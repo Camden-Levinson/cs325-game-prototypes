@@ -3,7 +3,7 @@
 class Game extends Phaser.Scene{
 
     constructor(){
-        super('game');
+        super('Game');
     }
     
     quitGame() {

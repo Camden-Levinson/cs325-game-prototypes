@@ -3,10 +3,10 @@
 class Boot extends Phaser.Scene{
 
     constructor(){
-        super('boot');
+        super('Boot');
     }
 
-    init() {
+    /*init() {
 
         //  Unless you specifically know your this needs to support multi-touch I would recommend setting this to 1
         this.input.maxPointers = 1;
@@ -29,7 +29,7 @@ class Boot extends Phaser.Scene{
             this.scale.pageAlignHorizontally = true;
         }
 
-    }
+    }*/
 
     preload() {
 

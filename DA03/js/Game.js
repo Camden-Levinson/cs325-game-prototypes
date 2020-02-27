@@ -32,15 +32,6 @@ GameStates.makeGame = function( game, shared ) {
             game.scoreText = null;
         },
 
-        preload: function ()
-        {
-            game.load.image('sky', 'src/games/firstgame/assets/sky.png');
-            game.load.image('ground', 'src/games/firstgame/assets/platform.png');
-            game.load.image('star', 'src/games/firstgame/assets/star.png');
-            game.load.image('bomb', 'src/games/firstgame/assets/bomb.png');
-            game.load.spritesheet('dude', 'src/games/firstgame/assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-        },
-
         create: function ()
         {
             game.add.image(400, 300, 'sky');

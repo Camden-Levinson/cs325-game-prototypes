@@ -1,22 +1,4 @@
-var config = {
-    type: Phaser.AUTO,
-    scale: {
-        mode: Phaser.Scale,
-        parent: 'game',
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 800,
-        height: 600
-    },
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 300 },
-            debug: false
-        }
-    },
-    scene: GameScene
-};
-var game = new Phaser.Game(config);
+
 
 var GameScene = new Phaser.Class({
 
@@ -143,3 +125,22 @@ var GameScene = new Phaser.Class({
         game.scoreText.setText('Score: ' + game.score);
     }
 });
+var config = {
+    type: Phaser.AUTO,
+    scale: {
+        mode: Phaser.Scale,
+        parent: 'game',
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 800,
+        height: 600
+    },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+    scene: GameScene
+};
+var game = new Phaser.Game(config);

@@ -24,28 +24,28 @@ GameStates.makeGame = function( game, shared ) {
 
         function GameScene ()
         {
-            Phaser.Scene.call(this, { key: 'gameScene', active: true });
+            Phaser.Scene.call(game, { key: 'gameScene', active: true });
 
-            this.player = null;
-            this.cursors = null;
-            this.score = 0;
-            this.scoreText = null;
+            game.player = null;
+            game.cursors = null;
+            game.score = 0;
+            game.scoreText = null;
         },
 
         preload: function ()
         {
-            this.load.image('sky', 'src/games/firstgame/assets/sky.png');
-            this.load.image('ground', 'src/games/firstgame/assets/platform.png');
-            this.load.image('star', 'src/games/firstgame/assets/star.png');
-            this.load.image('bomb', 'src/games/firstgame/assets/bomb.png');
-            this.load.spritesheet('dude', 'src/games/firstgame/assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+            game.load.image('sky', 'src/games/firstgame/assets/sky.png');
+            game.load.image('ground', 'src/games/firstgame/assets/platform.png');
+            game.load.image('star', 'src/games/firstgame/assets/star.png');
+            game.load.image('bomb', 'src/games/firstgame/assets/bomb.png');
+            game.load.spritesheet('dude', 'src/games/firstgame/assets/dude.png', { frameWidth: 32, frameHeight: 48 });
         },
 
         create: function ()
         {
-            this.add.image(400, 300, 'sky');
+            game.add.image(400, 300, 'sky');
 
-            var platforms = this.physics.add.staticGroup();
+            var platforms = game.physics.add.staticGroup();
 
             platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
@@ -53,34 +53,34 @@ GameStates.makeGame = function( game, shared ) {
             platforms.create(50, 250, 'ground');
             platforms.create(750, 220, 'ground');
 
-            var player = this.physics.add.sprite(100, 450, 'dude');
+            var player = game.physics.add.sprite(100, 450, 'dude');
 
             player.setBounce(0.2);
             player.setCollideWorldBounds(true);
 
-            this.anims.create({
+            game.anims.create({
                 key: 'left',
-                frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+                frames: game.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
                 frameRate: 10,
                 repeat: -1
             });
 
-            this.anims.create({
+            game.anims.create({
                 key: 'turn',
                 frames: [ { key: 'dude', frame: 4 } ],
                 frameRate: 20
             });
 
-            this.anims.create({
+            game.anims.create({
                 key: 'right',
-                frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+                frames: game.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
                 frameRate: 10,
                 repeat: -1
             });
 
-            this.cursors = this.input.keyboard.createCursorKeys();
+            game.cursors = game.input.keyboard.createCursorKeys();
 
-            var stars = this.physics.add.group({
+            var stars = game.physics.add.group({
                 key: 'star',
                 repeat: 11,
                 setXY: { x: 12, y: 0, stepX: 70 }
@@ -92,20 +92,20 @@ GameStates.makeGame = function( game, shared ) {
 
             });
 
-            this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+            game.scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
-            this.physics.add.collider(player, platforms);
-            this.physics.add.collider(stars, platforms);
+            game.physics.add.collider(player, platforms);
+            game.physics.add.collider(stars, platforms);
 
-            this.physics.add.overlap(player, stars, this.collectStar, null, this);
+            game.physics.add.overlap(player, stars, game.collectStar, null, game);
 
-            this.player = player;
+            game.player = player;
         },
 
         update: function ()
         {
-            var cursors = this.cursors;
-            var player = this.player;
+            var cursors = game.cursors;
+            var player = game.player;
 
             if (cursors.left.isDown)
             {
@@ -136,8 +136,8 @@ GameStates.makeGame = function( game, shared ) {
         {
             star.disableBody(true, true);
 
-            this.score += 10;
-            this.scoreText.setText('Score: ' + this.score);
+            game.score += 10;
+            game.scoreText.setText('Score: ' + game.score);
         }
 
     });

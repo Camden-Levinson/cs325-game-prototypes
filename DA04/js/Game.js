@@ -17,6 +17,8 @@ class Game extends Phaser.Scene{
     }
 
     create() {
+        this.gameOver = false;
+
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.chicken = this.physics.add.sprite(400, 500, 'chicken');
         this.chicken.setCollideWorldBounds(true);

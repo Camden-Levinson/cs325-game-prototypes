@@ -48,7 +48,7 @@ class Boot extends Phaser.Scene{
             key: "chicken_idle",
             frames: [ { key: 'chicken', frame: 0} ],
             frameRate: 10,
-            /repeat: -1
+            repeat: -1
         });
         this.anims.create({
             key: "chicken_left",

@@ -23,7 +23,7 @@ class MainMenu extends Phaser.Scene {
         //	Naturally I expect you to do something significantly better :)
 
         var music = this.sound.add('titleMusic');
-        //music.play();
+        music.play();
 
         this.add.sprite(400, 300, 'titlePage');
         this.add.text(400, 50, 'Chicken Revenge', { font: '48px Arial', fill: '#000000' });

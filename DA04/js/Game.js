@@ -17,10 +17,10 @@ class Game extends Phaser.Scene{
     }
 
     create() {
-
+        this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.chicken = this.physics.add.sprite(400, 500, 'chicken');
         this.chicken.setCollideWorldBounds(true);
-        this.chicken.setSize(32, 73);
+        this.chicken.setSize(32, 32);
         this.chicken.setScale(2);
     }
 

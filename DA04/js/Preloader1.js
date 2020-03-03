@@ -32,6 +32,37 @@ class Preloader extends Phaser.Scene{
 
         //  Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes
         this.preloadBar.cropEnabled = false;
+        
+        this.anims.create({
+            key: "chicken_idle",
+            frames: [ { key: 'chicken', frame: 0} ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "chicken_left",
+            frames: [ { key: 'chicken', frame: 1} ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "chicken_right",
+            frames: [ { key: 'chicken', frame: 2 } ],
+            frameRate: 20,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "chicken_left_attack",
+            frames: [ { key: 'chicken', frame: 3 } ],
+            frameRate: 60,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "chicken_right_attack",
+            frames: [ { key: 'chicken', frame: 4 } ],
+            frameRate: 60,
+            repeat: -1
+        });
 
     }
 

@@ -22,7 +22,9 @@ class Game extends Phaser.Scene{
         this.physics.world.setBounds(0, 0, 800, 600);
 
         this.cursorKeys = this.input.keyboard.createCursorKeys();
+        this.attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.chicken = this.physics.add.sprite(400, 500, 'chicken');
+        this.chicken.setBounce(0.2);
         this.chicken.setActive(true);
         this.chicken.setCollideWorldBounds(true);
         this.chicken.setSize(32, 32);
@@ -48,18 +50,27 @@ class Game extends Phaser.Scene{
         // Directional movement
         if (this.cursorKeys.left.isDown) {
             this.facing = "left";
-            this.chicken.x -= 4;
-            //this.guy.setVelocityX(-this.gameSettings.playerSpeed);
+            this.chicken.setVelocityX(-200);
             this.chicken.anims.play("chicken_left", true);
         }
         else if (this.cursorKeys.right.isDown) {
             this.facing = "right";
-            this.chicken.x += 4;
+            this.chicken.setVelocityX(200);
             this.chicken.anims.play("chicken_right", true);
         }
         else {
-            //this.chicken.setVelocityX(0);
+            this.chicken.setVelocityX(0);
             this.chicken.anims.play("chicken_idle", true);
+        }
+        if(this.attackKey.isDown){
+            if(this.facing == "left"){
+                this.chicken.anims.play("chicken_left_attack", true);
+            }else if(this.facing == "right"){
+                this.chicken.anims.play("chicken_right_attack", true);
+            }
+        }
+        if(this.cursorKeys.up.isDown && this.chicken.body.onFloor()){
+            this.chicken.setVelocityY(-600);
         }
     }
 }

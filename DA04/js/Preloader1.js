@@ -25,6 +25,7 @@ class Preloader extends Phaser.Scene{
         this.load.atlas('playButton', 'assets/play_button.png', 'assets/play_button.json');
         this.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
         this.load.spritesheet('chicken', 'assets/Chicken.png', {frameWidth: 32, frameHeight: 32});
+        this.load.spritesheet('Link', 'assets/Link.png', {frameWidth: 32, frameHeight: 64});
         //  + lots of other required assets here
     }
 
@@ -61,6 +62,18 @@ class Preloader extends Phaser.Scene{
             key: "chicken_right_attack",
             frames: [ { key: 'chicken', frame: 4 } ],
             frameRate: 60,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "Link_left",
+            frames: this.anims.generateFrameNumbers('Link', { start: 0, end: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "Link_right",
+            frames: this.anims.generateFrameNumbers('Link', { start: 7, end: 4 }),
+            frameRate: 10,
             repeat: -1
         });
 

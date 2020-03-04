@@ -18,7 +18,9 @@ class Game extends Phaser.Scene{
 
     create() {
         this.facing = "right";
+        this.attacking = false;
         this.gameOver = false;
+        this.gameOver2 = false;
         this.physics.world.setBounds(0, 0, 800, 600);
 
         this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -29,7 +31,13 @@ class Game extends Phaser.Scene{
         this.chicken.setCollideWorldBounds(true);
         this.chicken.setSize(32, 32);
         this.chicken.setScale(2);
+        this.Link = this.physics.add.sprite(600, 600, 'Link');
+        this.Link.setCollideWorldBounds(true);
+        this.Link.setSize(32, 64);
+        this.Link.setScale(2);
 
+        //this.physics.add.collider(this.chicken, this.Link);
+        this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
         
     }
 
@@ -37,6 +45,21 @@ class Game extends Phaser.Scene{
         if(!this.gameOver){
             this.playerMovementManager();
         }
+        if(!this.gameOver2){
+            if(this.Link.x > this.chicken.x){
+                this.Link.anims.play("Link_left", true);
+                this.Link.setVelocityX(-20);
+            }
+            else if(this.Link.x < this.chicken.x){
+                this.Link.anims.play("Link_right", true);
+                this.Link.setVelocityX(20);
+            }
+        }
+        if(this.gameOver2){
+            this.spawnLink();
+        }
+        
+
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
         
         // Accelerate the 'logo' sprite towards the cursor,
@@ -49,20 +72,24 @@ class Game extends Phaser.Scene{
     playerMovementManager() {
         // Directional movement
         if (this.cursorKeys.left.isDown) {
+            this.attacking = false;
             this.facing = "left";
             this.chicken.setVelocityX(-200);
             this.chicken.anims.play("chicken_left", true);
         }
         else if (this.cursorKeys.right.isDown) {
+            this.attacking = false;
             this.facing = "right";
             this.chicken.setVelocityX(200);
             this.chicken.anims.play("chicken_right", true);
         }
         else {
+            this.attacking = false;
             this.chicken.setVelocityX(0);
             this.chicken.anims.play("chicken_idle", true);
         }
         if(this.attackKey.isDown){
+            this.attacking = true;
             if(this.facing == "left"){
                 this.chicken.anims.play("chicken_left_attack", true);
             }else if(this.facing == "right"){
@@ -72,6 +99,25 @@ class Game extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.chicken.body.onFloor()){
             this.chicken.setVelocityY(-600);
         }
+        
+    }
+    action(){
+        if(this.attacking){
+            this.gameOver2 = true;
+            this.Link.anims.stop();
+            this.Link.destroy();
+        }else{
+            this.gameOver = true;
+            this.chicken.destroy();
+        }
+    }
+    spawnLink(){
+        this.Link = this.physics.add.sprite(100, 100, 'Link');
+        this.Link.setCollideWorldBounds(true);
+        this.Link.setSize(32, 64);
+        this.Link.setScale(2);
+        this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
+        this.gameOver2 = false;
     }
 }
 //export default Game;

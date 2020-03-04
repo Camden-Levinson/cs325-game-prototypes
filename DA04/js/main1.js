@@ -9,7 +9,7 @@ var config = {
     width: 800,
     height: 600,
     parent: 'game',
-    backgroundColor: 0x000000,
+    backgroundColor: 0x98D9EA,
     pixelArt: true,
     physics: {
         default: "arcade",

@@ -22,6 +22,7 @@ class Preloader extends Phaser.Scene{
         //  Here we load the rest of the assets our game needs.
         //  As this is just a Project Template I've not provided these assets, swap them for your own.
         this.load.image('titlePage', 'assets/title.jpg');
+        this.load.image('ground', 'assets/ground.png');
         this.load.atlas('playButton', 'assets/play_button.png', 'assets/play_button.json');
         this.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
         this.load.spritesheet('chicken', 'assets/Chicken.png', {frameWidth: 32, frameHeight: 32});

@@ -23,20 +23,31 @@ class Game extends Phaser.Scene{
         this.gameOver2 = false;
         this.physics.world.setBounds(0, 0, 800, 600);
 
+        this.ground = this.physics.add.group();
+        this.ground.enableBody = true;
+        for(var i = 0; i < 14; i++){
+            this.layer = this.ground.create(-64+(64*(i+1)), 600-16, 'ground');
+            this.layer.setScale(2);
+            this.layer.setCollideWorldBounds(true);
+            this.layer.body.immovable = true;
+        }
+        
+        
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.chicken = this.physics.add.sprite(400, 500, 'chicken');
+        this.chicken = this.physics.add.sprite(400, 100, 'chicken');
         this.chicken.setBounce(0.2);
         this.chicken.setActive(true);
         this.chicken.setCollideWorldBounds(true);
         this.chicken.setSize(32, 32);
         this.chicken.setScale(2);
-        this.Link = this.physics.add.sprite(600, 600, 'Link');
+        this.Link = this.physics.add.sprite(600, 100, 'Link');
         this.Link.setCollideWorldBounds(true);
         this.Link.setSize(32, 64);
         this.Link.setScale(2);
 
-        //this.physics.add.collider(this.chicken, this.Link);
+        this.physics.add.collider(this.ground, this.Link);
+        this.physics.add.collider(this.ground, this.chicken);
         this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
         
     }
@@ -96,7 +107,7 @@ class Game extends Phaser.Scene{
                 this.chicken.anims.play("chicken_right_attack", true);
             }
         }
-        if(this.cursorKeys.up.isDown && this.chicken.body.onFloor()){
+        if(this.cursorKeys.up.isDown && this.chicken.y == 504){
             this.chicken.setVelocityY(-600);
         }
         
@@ -112,12 +123,15 @@ class Game extends Phaser.Scene{
         }
     }
     spawnLink(){
-        this.Link = this.physics.add.sprite(100, 100, 'Link');
-        this.Link.setCollideWorldBounds(true);
+        this.Link = this.physics.add.sprite(-100, 500, 'Link');
+        //this.Link.setCollideWorldBounds(true);
         this.Link.setSize(32, 64);
         this.Link.setScale(2);
         this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
         this.gameOver2 = false;
+    }
+    addGround(i){
+        this.ground.create(800-(64*(1+i)), 600-32, 'ground');
     }
 }
 //export default Game;

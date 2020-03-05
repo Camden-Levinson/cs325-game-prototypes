@@ -17,6 +17,8 @@ class Game extends Phaser.Scene{
     }
 
     create() {
+        this.music = this.sound.add('titleMusic');
+        this.music.play();
         this.numberofLinks = 1;
         this.timer = this.time.addEvent({delay: 10000, callback: this.Full, callbackScope: this, repeat: 20, paused: true});
         this.info = this.add.text(800, 300, 'Belly Empty', { font: '12px Arial', fill: '#000000' });
@@ -132,6 +134,7 @@ class Game extends Phaser.Scene{
                 this.spawnLink();
             }
         }else{
+            this.music.stop();
             this.gameOver = true;
             this.gameOver2 = true;
             this.full = false;
@@ -156,6 +159,7 @@ class Game extends Phaser.Scene{
             this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
             this.gameOver2 = false;
         }else{
+            this.music.stop();
             this.info.setText("You got your revenge");
             this.time.addEvent({delay: 5000, callback: this.quitGame, callbackScope: this});
         }

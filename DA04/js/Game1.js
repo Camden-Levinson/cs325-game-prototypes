@@ -21,12 +21,12 @@ class Game extends Phaser.Scene{
         this.attacking = false;
         this.gameOver = false;
         this.gameOver2 = false;
-        this.physics.world.setBounds(0, 0, 800, 600);
-
+        this.physics.world.setBounds(0, 0, 1600, 600);
+        this.cameras.main.setBounds(0, 0, 1600, 600);
         this.ground = this.physics.add.group();
         this.ground.enableBody = true;
-        for(var i = 0; i < 14; i++){
-            this.layer = this.ground.create(-64+(64*(i+1)), 600-16, 'ground');
+        for(var i = 0; i < 30; i++){
+            this.layer = this.ground.create(-32+(64*(i+1)), 600-16, 'ground');
             this.layer.setScale(2);
             this.layer.setCollideWorldBounds(true);
             this.layer.body.immovable = true;
@@ -42,10 +42,11 @@ class Game extends Phaser.Scene{
         this.chicken.setSize(32, 32);
         this.chicken.setScale(2);
         this.Link = this.physics.add.sprite(600, 100, 'Link');
-        this.Link.setCollideWorldBounds(true);
+        //this.Link.setCollideWorldBounds(true);
         this.Link.setSize(32, 64);
         this.Link.setScale(2);
-
+        this.cameras.main.startFollow(this.chicken, true, 1.00, 1.00);
+        this.cameras.main.setZoom(1.25);
         this.physics.add.collider(this.ground, this.Link);
         this.physics.add.collider(this.ground, this.chicken);
         this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
@@ -59,11 +60,13 @@ class Game extends Phaser.Scene{
         if(!this.gameOver2){
             if(this.Link.x > this.chicken.x){
                 this.Link.anims.play("Link_left", true);
-                this.Link.setVelocityX(-20);
+                this.Link.setVelocityX(-50);
             }
             else if(this.Link.x < this.chicken.x){
                 this.Link.anims.play("Link_right", true);
-                this.Link.setVelocityX(20);
+                this.Link.setVelocityX(50);
+            }else if(this.Link.x == this.chicken.x){
+                this.Link.anims.play("Link_win", true);
             }
         }
         if(this.gameOver2){
@@ -108,7 +111,7 @@ class Game extends Phaser.Scene{
             }
         }
         if(this.cursorKeys.up.isDown && this.chicken.y == 504){
-            this.chicken.setVelocityY(-600);
+            this.chicken.setVelocityY(-700);
         }
         
     }
@@ -119,11 +122,13 @@ class Game extends Phaser.Scene{
             this.Link.destroy();
         }else{
             this.gameOver = true;
+            this.chicken.x = 850;
             this.chicken.destroy();
         }
     }
     spawnLink(){
-        this.Link = this.physics.add.sprite(-100, 500, 'Link');
+        this.Link = this.physics.add.sprite(0, 100, 'Link');
+        this.physics.add.collider(this.ground, this.Link);
         //this.Link.setCollideWorldBounds(true);
         this.Link.setSize(32, 64);
         this.Link.setScale(2);

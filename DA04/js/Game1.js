@@ -48,7 +48,6 @@ class Game extends Phaser.Scene{
         this.Link = this.physics.add.sprite(600, 100, 'Link');
         //this.Link.setCollideWorldBounds(true);
         this.Link.setSize(32, 64);
-        this.Link.setY(32);
         this.Link.setScale(2);
         this.cameras.main.startFollow(this.chicken, true, 1.00, 1.00);
         //this.cameras.main.setZoom(1.25);

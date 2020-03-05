@@ -17,6 +17,10 @@ class Game extends Phaser.Scene{
     }
 
     create() {
+        this.numberofLinks = 1;
+        this.timer = this.time.addEvent({delay: 10000, callback: this.Full, callbackScope: this, repeat: 20, paused: true});
+        this.info = this.add.text(800, 300, 'Belly Empty', { font: '12px Arial', fill: '#000000' });
+        this.full = false;
         this.facing = "right";
         this.attacking = false;
         this.gameOver = false;
@@ -46,11 +50,10 @@ class Game extends Phaser.Scene{
         this.Link.setSize(32, 64);
         this.Link.setScale(2);
         this.cameras.main.startFollow(this.chicken, true, 1.00, 1.00);
-        this.cameras.main.setZoom(1.25);
+        //this.cameras.main.setZoom(1.25);
         this.physics.add.collider(this.ground, this.Link);
         this.physics.add.collider(this.ground, this.chicken);
         this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
-        
     }
 
     update() {
@@ -60,18 +63,23 @@ class Game extends Phaser.Scene{
         if(!this.gameOver2){
             if(this.Link.x > this.chicken.x){
                 this.Link.anims.play("Link_left", true);
-                this.Link.setVelocityX(-50);
+                this.Link.setVelocityX(-50-(this.numberofLinks*5));
             }
             else if(this.Link.x < this.chicken.x){
                 this.Link.anims.play("Link_right", true);
-                this.Link.setVelocityX(50);
+                this.Link.setVelocityX(50+(this.numberofLinks*5));
             }else if(this.Link.x == this.chicken.x){
+                this.Link.setVelocityX(0);
                 this.Link.anims.play("Link_win", true);
             }
         }
-        if(this.gameOver2){
-            this.spawnLink();
+        this.info.setX(this.chicken.x-30);
+        if(this.full){
+            this.info.setText('Belly Full, time to digest: ' + Math.round(10000-this.timer.getElapsed())/1000);
         }
+        /*if(this.gameOver2 && !this.gameOver){
+            this.spawnLink();
+        }*/
         
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
@@ -102,7 +110,7 @@ class Game extends Phaser.Scene{
             this.chicken.setVelocityX(0);
             this.chicken.anims.play("chicken_idle", true);
         }
-        if(this.attackKey.isDown){
+        if(this.attackKey.isDown && this.full != true){
             this.attacking = true;
             if(this.facing == "left"){
                 this.chicken.anims.play("chicken_left_attack", true);
@@ -120,23 +128,42 @@ class Game extends Phaser.Scene{
             this.gameOver2 = true;
             this.Link.anims.stop();
             this.Link.destroy();
+            if(this.numberofLinks <= 11){
+                this.spawnLink();
+            }
         }else{
             this.gameOver = true;
-            this.chicken.x = 850;
+            this.gameOver2 = true;
+            this.full = false;
+            this.cameras.main.startFollow(this.Link, true, 1.00, 1.00);
+            this.Link.setVelocityX(0);
+            this.Link.anims.play("Link_win", true);
+            this.info.setText('YOU DIED')
             this.chicken.destroy();
+            this.time.addEvent({delay: 5000, callback: this.quitGame, callbackScope: this});
         }
     }
     spawnLink(){
-        this.Link = this.physics.add.sprite(0, 100, 'Link');
-        this.physics.add.collider(this.ground, this.Link);
-        //this.Link.setCollideWorldBounds(true);
-        this.Link.setSize(32, 64);
-        this.Link.setScale(2);
-        this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
-        this.gameOver2 = false;
+        if(this.numberofLinks <= 10){
+            this.full = true;
+            this.timer.paused = false;
+            this.numberofLinks += 1;
+            this.Link = this.physics.add.sprite(Phaser.Math.Between(100, 1500), 100, 'Link');
+            this.physics.add.collider(this.ground, this.Link);
+            //this.Link.setCollideWorldBounds(true);
+            this.Link.setSize(32, 64);
+            this.Link.setScale(2);
+            this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
+            this.gameOver2 = false;
+        }else{
+            this.info.setText("You got your revenge");
+            this.time.addEvent({delay: 5000, callback: this.quitGame, callbackScope: this});
+        }
     }
-    addGround(i){
-        this.ground.create(800-(64*(1+i)), 600-32, 'ground');
+    Full(){
+        this.timer.paused = true;
+        this.full = false;
+        this.info.setText("Belly Empty");
     }
 }
 //export default Game;

@@ -19,9 +19,9 @@ class Game extends Phaser.Scene{
     create() {
         this.music = this.sound.add('titleMusic');
         this.music.play();
-        this.numberofLinks = 1;
+        this.numberofLinks = 0;
         this.timer = this.time.addEvent({delay: 10000, callback: this.Full, callbackScope: this, repeat: 20, paused: true});
-        this.info = this.add.text(800, 300, 'Belly Empty', { font: '12px Arial', fill: '#000000' });
+        this.info = this.add.text(800, 300, 'Belly Empty\n Number of Links eaten: ' + this.numberofLinks, { font: '12px Arial', fill: '#000000' });
         this.full = false;
         this.facing = "right";
         this.attacking = false;
@@ -77,7 +77,7 @@ class Game extends Phaser.Scene{
         }
         this.info.setX(this.chicken.x-30);
         if(this.full){
-            this.info.setText('Belly Full, time to digest: ' + Math.round(10000-this.timer.getElapsed())/1000);
+            this.info.setText('Belly Full, time to digest: ' + Math.round(10000-this.timer.getElapsed())/1000 + '\n Number of Links eaten: ' + this.numberofLinks);
         }
         /*if(this.gameOver2 && !this.gameOver){
             this.spawnLink();
@@ -167,7 +167,7 @@ class Game extends Phaser.Scene{
     Full(){
         this.timer.paused = true;
         this.full = false;
-        this.info.setText("Belly Empty");
+        this.info.setText("Belly Empty\n Number of Links eaten: " + this.numberofLinks);
     }
 }
 //export default Game;

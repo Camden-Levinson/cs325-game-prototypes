@@ -18,9 +18,13 @@ class Game extends Phaser.Scene{
 
     create() {
         this.idle = false;
-        this.time.addEvent({delay: 5000, callback: this.idle = true, callbackScope: this});
+        this.timer = this.time.addEvent({delay: 10000});
         this.gameOver = false;
         this.guy = this.physics.add.sprite(400, 300, 'guy');
+        this.guy.setSize(16, 32);
+        this.guy.setScale(4);
+        this.guy.setCollideWorldBounds(true);
+        this.cursorKeys = this.input.keyboard.createCursorKeys();
     }
 
     update() {
@@ -43,11 +47,13 @@ class Game extends Phaser.Scene{
     }
     playerMovementManager() {
         // Directional movement
-        this.guy.setVelocityX(0);
-        if(!this.idle){
+        if(this.cursorKeys.right.isDown){
+            this.guy.setVelocityX(100);
+            this.guy.anims.play("guy_walk_right", true);
+        }
+        else{
+            this.guy.setVelocityX(0);
             this.guy.anims.play("guy_idle", true);
-        }else{
-            this.guy.anims.play("guy_yawn", true);
         }
     }
 }

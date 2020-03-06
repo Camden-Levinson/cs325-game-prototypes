@@ -37,13 +37,19 @@ class Preloader extends Phaser.Scene{
         this.anims.create({
             key: "guy_idle",
             frames: this.anims.generateFrameNumbers('guy', { start: 0, end: 3 }),
-            frameRate: 10,
+            frameRate: 1,
             repeat: -1
         });
         this.anims.create({
             key: "guy_yawn",
             frames: this.anims.generateFrameNumbers('guy', { start: 4, end: 7 }),
-            frameRate: 10,
+            frameRate: 1,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "guy_walk_right",
+            frames: this.anims.generateFrameNumbers('guy', { start: 8, end: 11 }),
+            frameRate: 1,
             repeat: -1
         });
 

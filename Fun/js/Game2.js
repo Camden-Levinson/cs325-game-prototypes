@@ -18,6 +18,7 @@ class Game extends Phaser.Scene{
 
     create() {
         this.idle = false;
+        this.facing = "right";
         this.timer = this.time.addEvent({delay: 10000});
         this.gameOver = false;
         this.guy = this.physics.add.sprite(400, 300, 'guy');
@@ -25,6 +26,7 @@ class Game extends Phaser.Scene{
         this.guy.setScale(4);
         this.guy.setCollideWorldBounds(true);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
+        this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     update() {
@@ -47,9 +49,24 @@ class Game extends Phaser.Scene{
     }
     playerMovementManager() {
         // Directional movement
-        if(this.cursorKeys.right.isDown){
+        if(this.cursorKeys.left.isDown){
+            this.facing = "left";
+            this.guy.setVelocityX(-100);
+            this.guy.flipX = true;
+            this.guy.anims.play("guy_walk", true);
+        }else if(this.cursorKeys.right.isDown){
+            this.facing = "right";
             this.guy.setVelocityX(100);
-            this.guy.anims.play("guy_walk_right", true);
+            this.guy.flipX = false;
+            this.guy.anims.play("guy_walk", true);
+        }else if(this.jumpKey.isDown){
+            if(this.facing == "left"){
+                this.guy.flipX = true;
+            }
+            this.guy.setVelocityY(-100);
+            this.guy.anims.play("guy_jump", true);
+        }else if(this.guy.body.onWall()){
+            this.guy.anims.play("guy_climb", true);
         }
         else{
             this.guy.setVelocityX(0);

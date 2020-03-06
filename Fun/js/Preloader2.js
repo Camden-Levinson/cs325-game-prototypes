@@ -22,8 +22,6 @@ class Preloader extends Phaser.Scene{
         //  Here we load the rest of the assets our game needs.
         //  As this is just a Project Template I've not provided these assets, swap them for your own.
         this.load.image('titlePage', 'assets/title.jpg');
-        this.load.image('ground', 'assets/ground.png');
-        this.load.atlas('playButton', 'assets/play_button.png', 'assets/play_button.json');
         this.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
         this.load.spritesheet('guy', 'assets/guy.png', {frameWidth: 16, frameHeight: 32});
         //  + lots of other required assets here
@@ -42,13 +40,25 @@ class Preloader extends Phaser.Scene{
         });
         this.anims.create({
             key: "guy_yawn",
+            frames: this.anims.generateFrameNumbers('guy', { start: 8, end: 11 }),
+            frameRate: 1,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "guy_walk",
             frames: this.anims.generateFrameNumbers('guy', { start: 4, end: 7 }),
             frameRate: 1,
             repeat: -1
         });
         this.anims.create({
-            key: "guy_walk_right",
-            frames: this.anims.generateFrameNumbers('guy', { start: 8, end: 11 }),
+            key: "guy_jump",
+            frames: [ { key: 'guy', frame: 12} ],
+            frameRate: 1,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "guy_wall",
+            frames: [ { key: 'guy', frame: 13} ],
             frameRate: 1,
             repeat: -1
         });

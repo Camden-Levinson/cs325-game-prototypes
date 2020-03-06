@@ -51,26 +51,45 @@ class Game extends Phaser.Scene{
         // Directional movement
         if(this.cursorKeys.left.isDown){
             this.facing = "left";
-            this.guy.setVelocityX(-100);
+            this.guy.setVelocityX(-400);
             this.guy.flipX = true;
             this.guy.anims.play("guy_walk", true);
         }else if(this.cursorKeys.right.isDown){
             this.facing = "right";
-            this.guy.setVelocityX(100);
+            this.guy.setVelocityX(400);
             this.guy.flipX = false;
             this.guy.anims.play("guy_walk", true);
-        }else if(this.jumpKey.isDown){
+        }
+        else if(this.guy.body.onFloor()){
+            this.guy.setVelocityX(0);
+            this.guy.anims.play("guy_idle", true);
+        }
+        if(!this.guy.body.onFloor()){
+            if(this.cursorKeys.left.isDown){
+                this.facing = "left"
+                this.guy.setVelocityX(-400);
+            }else if(this.cursorKeys.right.isDown){
+                this.facing = "right";
+                this.guy.setVelocityX(400);
+            }
+        }
+        if(!this.guy.body.onFloor()){
+            this.guy.anims.play("guy_jump", true);
+        }
+        if(this.jumpKey.isDown){
             if(this.facing == "left"){
                 this.guy.flipX = true;
             }
-            this.guy.setVelocityY(-100);
-            this.guy.anims.play("guy_jump", true);
-        }else if(this.guy.body.onWall()){
-            this.guy.anims.play("guy_climb", true);
+            this.guy.setVelocityY(-300);
         }
-        else{
-            this.guy.setVelocityX(0);
-            this.guy.anims.play("guy_idle", true);
+        if(this.guy.x == 768 || this.guy.x == 32){
+            if(this.facing == "left"){
+                this.guy.flipX = true;
+            }
+            this.guy.anims.play("guy_wall", true);
+            if(this.cursorKeys.up.isDown){
+                this.guy.setVelocityY(-100);
+            }
         }
     }
 }

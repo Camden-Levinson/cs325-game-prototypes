@@ -51,14 +51,14 @@ class Preloader extends Phaser.Scene{
             repeat: -1
         });
         this.anims.create({
-            key: "guy_jump",
-            frames: [ { key: 'guy', frame: 12} ],
+            key: "guy_wall",
+            frames: this.anims.generateFrameNumbers('guy', { start: 13, end: 14 }),
             frameRate: 1,
             repeat: -1
         });
         this.anims.create({
-            key: "guy_wall",
-            frames: this.anims.generateFrameNumbers('guy', { start: 13, end: 14 }),
+            key: "guy_jump",
+            frames: [ { key: 'guy', frame: 12} ],
             frameRate: 1,
             repeat: -1
         });

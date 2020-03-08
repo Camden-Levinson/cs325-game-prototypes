@@ -59,6 +59,11 @@ class Game extends Phaser.Scene{
             this.guy.setVelocityX(400);
             this.guy.flipX = false;
             this.guy.anims.play("guy_walk", true);
+        }else if(this.cursorKeys.up.isDown){
+            if(this.guy.x == 768){
+                this.guy.setVelocityY(-100);
+            }
+            this.guy.anims.play("guy_wall", true);
         }
         else if(this.guy.body.onFloor()){
             this.guy.setVelocityX(0);
@@ -82,15 +87,15 @@ class Game extends Phaser.Scene{
             }
             this.guy.setVelocityY(-300);
         }
-        if(this.guy.x == 768 || this.guy.x == 32){
-            if(this.facing == "left"){
-                this.guy.flipX = true;
-            }
-            this.guy.anims.play("guy_wall", true);
-            if(this.cursorKeys.up.isDown){
-                this.guy.setVelocityY(-100);
-            }
-        }
+        //if(this.cursorKeys.up.isDown){
+            //if(this.facing == "left"){
+              //  this.guy.flipX = true;
+            //}
+            //this.guy.anims.play("guy_wall", true);
+            //if(this.cursorKeys.up.isDown){
+              //  this.guy.setVelocityY(-100);
+            //}
+        //}
     }
 }
 //export default Game;

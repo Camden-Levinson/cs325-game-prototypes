@@ -52,10 +52,12 @@ class Game extends Phaser.Scene{
         this.Link.setSize(32, 64);
         this.Link.setScale(2);
         this.cameras.main.startFollow(this.chicken, true, 1.00, 1.00);
+        this.egg = this.physics.add.sprite('egg');
         //this.cameras.main.setZoom(1.25);
         this.physics.add.collider(this.ground, this.Link);
         this.physics.add.collider(this.ground, this.chicken);
         this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
+        this.physics.add.overlap(this.Link, this.egg, this.slow, null, this);
     }
 
     update() {
@@ -123,7 +125,14 @@ class Game extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.chicken.y == 504){
             this.chicken.setVelocityY(-700);
         }
+        if(this.cursorKeys.down.isDown && this.chicken.y < this.Link.y){
+
+        }
         
+    }
+    slow(){
+        this.Link.setVelocityX(0);
+        this.time.addEvent({delay: 5000, callbackScope: this});
     }
     action(){
         if(this.attacking){

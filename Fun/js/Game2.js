@@ -27,6 +27,15 @@ class Game extends Phaser.Scene{
         this.guy.setCollideWorldBounds(true);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.ground = this.physics.add.staticGroup();
+        this.ground.enableBody = true;
+        for(var i = 0; i < 2; i++){
+            this.layer = this.ground.create(-32+(64*(i+1)), 300, 'ground');
+            this.layer.setSize(64, 64);
+            this.layer.setScale(2);
+            this.layer.immovable = true;
+        }
+        this.physics.add.collider(this.ground, this.guy);
     }
 
     update() {
@@ -60,12 +69,16 @@ class Game extends Phaser.Scene{
             this.guy.flipX = false;
             this.guy.anims.play("guy_walk", true);
         }else if(this.cursorKeys.up.isDown){
-            if(this.guy.x == 768){
+            this.guy.setVelocityX(0);
+            if(this.facing == "left"){
+                this.guy.flipX = true;
+            }
+            if(this.guy.x == 768 || this.guy.x == 32){
                 this.guy.setVelocityY(-100);
             }
             this.guy.anims.play("guy_wall", true);
         }
-        else if(this.guy.body.onFloor()){
+        else{
             this.guy.setVelocityX(0);
             this.guy.anims.play("guy_idle", true);
         }
@@ -78,24 +91,16 @@ class Game extends Phaser.Scene{
                 this.guy.setVelocityX(400);
             }
         }
-        if(!this.guy.body.onFloor()){
+        if(!this.guy.body.onFloor() && !(this.guy.x == 768 || this.guy.x == 32)){
             this.guy.anims.play("guy_jump", true);
         }
-        if(this.jumpKey.isDown){
+        if(this.jumpKey.isDown && this.guy.body.onFloor()){
             if(this.facing == "left"){
                 this.guy.flipX = true;
             }
             this.guy.setVelocityY(-300);
+            this.guy.anims.play("guy_jump", true);
         }
-        //if(this.cursorKeys.up.isDown){
-            //if(this.facing == "left"){
-              //  this.guy.flipX = true;
-            //}
-            //this.guy.anims.play("guy_wall", true);
-            //if(this.cursorKeys.up.isDown){
-              //  this.guy.setVelocityY(-100);
-            //}
-        //}
     }
 }
 //export default Game;

@@ -27,6 +27,7 @@ class Preloader extends Phaser.Scene{
         this.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
         this.load.spritesheet('chicken', 'assets/Chicken.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('Link', 'assets/Link.png', {frameWidth: 32, frameHeight: 64});
+        this.load.image('egg', 'assets/egg.png');
         //  + lots of other required assets here
     }
 

@@ -24,6 +24,7 @@ class Preloader extends Phaser.Scene{
         this.load.image('titlePage', 'assets/title.jpg');
         this.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
         this.load.spritesheet('guy', 'assets/guy.png', {frameWidth: 16, frameHeight: 32});
+        this.load.image('ground', 'assets/ground.png');
         //  + lots of other required assets here
     }
 
@@ -79,7 +80,7 @@ class Preloader extends Phaser.Scene{
         if (this.ready == false)
         {
             this.ready = true;
-            this.scene.start('MainMenu');
+            this.scene.start('Game');
         }
 
     }

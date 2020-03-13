@@ -29,12 +29,12 @@ class Game extends Phaser.Scene{
         this.gameOver2 = false;
         this.physics.world.setBounds(0, 0, 1600, 600);
         this.cameras.main.setBounds(0, 0, 1600, 600);
-        this.ground = this.physics.add.group();
+        this.ground = this.physics.add.staticGroup();
         this.ground.enableBody = true;
         for(var i = 0; i < 30; i++){
             this.layer = this.ground.create(-32+(64*(i+1)), 600-16, 'ground');
+            this.layer.setSize(64, 64);
             this.layer.setScale(2);
-            this.layer.setCollideWorldBounds(true);
             this.layer.body.immovable = true;
         }
         
@@ -52,12 +52,14 @@ class Game extends Phaser.Scene{
         this.Link.setSize(32, 64);
         this.Link.setScale(2);
         this.cameras.main.startFollow(this.chicken, true, 1.00, 1.00);
-        this.egg = this.physics.add.sprite('egg');
+        this.egg = this.physics.add.sprite(0, 510, 'egg');
+        this.egg.setActive(true);
         //this.cameras.main.setZoom(1.25);
         this.physics.add.collider(this.ground, this.Link);
         this.physics.add.collider(this.ground, this.chicken);
+        this.physics.add.collider(this.ground, this.egg);
         this.physics.add.overlap(this.chicken, this.Link, this.action, null, this);
-        this.physics.add.overlap(this.Link, this.egg, this.slow, null, this);
+        this.physics.add.overlap(this.egg, this.Link, this.slow, null, this);
     }
 
     update() {
@@ -81,6 +83,7 @@ class Game extends Phaser.Scene{
         if(this.full){
             this.info.setText('Belly Full, time to digest: ' + Math.round(10000-this.timer.getElapsed())/1000 + '\n Number of Links eaten: ' + this.numberofLinks);
         }
+
         /*if(this.gameOver2 && !this.gameOver){
             this.spawnLink();
         }*/
@@ -122,17 +125,29 @@ class Game extends Phaser.Scene{
                 this.chicken.anims.play("chicken_right_attack", true);
             }
         }
-        if(this.cursorKeys.up.isDown && this.chicken.y == 504){
+        if(this.cursorKeys.up.isDown && this.chicken.y == 520){
             this.chicken.setVelocityY(-700);
         }
-        if(this.cursorKeys.down.isDown && this.chicken.y < this.Link.y){
-
+        if(this.cursorKeys.down.isDown){
+            this.egg.setVisible(true);
+            this.egg.x = this.chicken.x;
+            this.egg.y = this.chicken.y;
         }
         
     }
     slow(){
+        this.gameOver2 = true;
         this.Link.setVelocityX(0);
-        this.time.addEvent({delay: 5000, callbackScope: this});
+        this.Link.anims.stop();
+        this.egg.destroy();
+        this.time.addEvent({delay: 3000, callback: this.reset, callbackScope: this});
+    }
+    reset(){
+        this.egg = this.physics.add.sprite(this.chicken.x, this.chicken.y, 'egg');
+        this.egg.setVisible(false);
+        this.physics.add.collider(this.ground, this.egg);
+        this.physics.add.overlap(this.egg, this.Link, this.slow, null, this);
+        this.gameOver2 = false;
     }
     action(){
         if(this.attacking){

@@ -17,6 +17,8 @@ class Game extends Phaser.Scene{
     }
 
     create() {
+        this.girl = this.add.sprite(400, 300, 'girl');
+        this.girl.setScale(1/16);
         this.idle = false;
         this.facing = "right";
         this.timer = this.time.addEvent({delay: 10000});

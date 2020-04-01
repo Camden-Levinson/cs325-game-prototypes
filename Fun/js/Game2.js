@@ -17,8 +17,8 @@ class Game extends Phaser.Scene{
     }
 
     create() {
-        this.girl = this.add.sprite(400, 300, 'girl');
-        this.girl.setScale(1/16);
+        this.boots = this.add.sprite(400, 300, 'boots');
+        this.boots.setScale(1/3);
         this.idle = false;
         this.facing = "right";
         this.timer = this.time.addEvent({delay: 10000});
@@ -67,9 +67,9 @@ class Game extends Phaser.Scene{
             this.guy.anims.play("guy_walk", true);
         }else if(this.cursorKeys.right.isDown){
             this.facing = "right";
-            this.guy.setVelocityX(400);
-            this.guy.flipX = false;
-            this.guy.anims.play("guy_walk", true);
+            this.boots.setVelocityX(400);
+            this.boots.flipX = false;
+            this.boots.anims.play("boot_walk", true);
         }else if(this.cursorKeys.up.isDown){
             this.guy.setVelocityX(0);
             if(this.facing == "left"){

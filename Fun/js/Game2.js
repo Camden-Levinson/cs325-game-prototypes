@@ -17,8 +17,13 @@ class Game extends Phaser.Scene{
     }
 
     create() {
-        this.boots = this.add.sprite(400, 300, 'boots');
-        this.boots.setScale(1/3);
+        this.boots = this.physics.add.sprite(400, 300, 'boots');
+        //this.boots.setScale(1/3);
+        this.boots.setCollideWorldBounds(true);
+        this.girl = this.physics.add.sprite(400, 300, 'girl');
+        this.girl.setScale(1/3);
+        this.girl.setCollideWorldBounds(true);
+        this.girl.visible = false;
         this.idle = false;
         this.facing = "right";
         this.timer = this.time.addEvent({delay: 10000});
@@ -27,6 +32,7 @@ class Game extends Phaser.Scene{
         this.guy.setSize(16, 32);
         this.guy.setScale(4);
         this.guy.setCollideWorldBounds(true);
+        this.guy.visible = false;
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.ground = this.physics.add.staticGroup();
@@ -61,47 +67,21 @@ class Game extends Phaser.Scene{
     playerMovementManager() {
         // Directional movement
         if(this.cursorKeys.left.isDown){
+            this.girl.visible = false;
             this.facing = "left";
-            this.guy.setVelocityX(-400);
-            this.guy.flipX = true;
-            this.guy.anims.play("guy_walk", true);
+            this.boots.setVelocityX(-400);
+            this.boots.flipX = true;
+            this.boots.anims.play("boot_walk", true);
         }else if(this.cursorKeys.right.isDown){
+            this.girl.visible = false;
             this.facing = "right";
             this.boots.setVelocityX(400);
             this.boots.flipX = false;
             this.boots.anims.play("boot_walk", true);
-        }else if(this.cursorKeys.up.isDown){
-            this.guy.setVelocityX(0);
-            if(this.facing == "left"){
-                this.guy.flipX = true;
-            }
-            if(this.guy.x == 768 || this.guy.x == 32){
-                this.guy.setVelocityY(-100);
-            }
-            this.guy.anims.play("guy_wall", true);
-        }
-        else{
-            this.guy.setVelocityX(0);
-            this.guy.anims.play("guy_idle", true);
-        }
-        if(!this.guy.body.onFloor()){
-            if(this.cursorKeys.left.isDown){
-                this.facing = "left"
-                this.guy.setVelocityX(-400);
-            }else if(this.cursorKeys.right.isDown){
-                this.facing = "right";
-                this.guy.setVelocityX(400);
-            }
-        }
-        if(!this.guy.body.onFloor() && !(this.guy.x == 768 || this.guy.x == 32)){
-            this.guy.anims.play("guy_jump", true);
-        }
-        if(this.jumpKey.isDown && this.guy.body.onFloor()){
-            if(this.facing == "left"){
-                this.guy.flipX = true;
-            }
-            this.guy.setVelocityY(-300);
-            this.guy.anims.play("guy_jump", true);
+        }else{
+            this.boots.setVelocityX(0);
+            this.girl.x = this.boots.x;
+            this.girl.y = this.boots.y;
         }
     }
 }

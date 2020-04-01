@@ -25,7 +25,8 @@ class Preloader extends Phaser.Scene{
         this.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
         this.load.spritesheet('guy', 'assets/guy.png', {frameWidth: 16, frameHeight: 32});
         this.load.image('ground', 'assets/ground.png');
-        this.load.spritesheet('boots', 'assets/Boot walk.png', {frameWidth: 173, frameHeight: 111});
+        this.load.spritesheet('boots', 'assets/Boots walk.png', {frameWidth: 173, frameHeight: 111});
+        this.load.image('girl', 'assets/Character.png');
         //  + lots of other required assets here
     }
 
@@ -66,8 +67,8 @@ class Preloader extends Phaser.Scene{
         });
         this.anims.create({
             key: "boot_walk",
-            frames: this.anims.generateFrameNumbers('boots', { start: 0, end: 7 }),
-            frameRate: 8,
+            frames: this.anims.generateFrameNumbers('boots', { start: 4, end: 7 }),
+            frameRate: 2,
             repeat: -1
         });
 

@@ -69,13 +69,13 @@ class Game extends Phaser.Scene{
         if(this.cursorKeys.left.isDown){
             this.girl.visible = false;
             this.facing = "left";
-            this.boots.setVelocityX(-400);
+            this.boots.setVelocityX(-100);
             this.boots.flipX = true;
             this.boots.anims.play("boot_walk", true);
         }else if(this.cursorKeys.right.isDown){
             this.girl.visible = false;
             this.facing = "right";
-            this.boots.setVelocityX(400);
+            this.boots.setVelocityX(100);
             this.boots.flipX = false;
             this.boots.anims.play("boot_walk", true);
         }else{

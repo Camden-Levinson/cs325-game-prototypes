@@ -67,7 +67,7 @@ class Preloader extends Phaser.Scene{
         });
         this.anims.create({
             key: "boot_walk",
-            frames: this.anims.generateFrameNumbers('boots', { start: 0, end: 7 }),
+            frames: this.anims.generateFrameNumbers('boots', { start: 0, end: 3 }),
             frameRate: 4,
             repeat: -1
         });

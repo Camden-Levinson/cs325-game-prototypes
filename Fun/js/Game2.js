@@ -17,7 +17,6 @@ class Game extends Phaser.Scene{
     }
 
     create() {
-        this.BG = this.add.image(0, 0, 'cityoneBG');
         this.boots = this.physics.add.sprite(400, 300, 'boots');
         this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
@@ -36,15 +35,12 @@ class Game extends Phaser.Scene{
         this.guy.visible = false;
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.ground = this.physics.add.staticGroup();
-        this.ground.enableBody = true;
-        for(var i = 0; i < 2; i++){
-            this.layer = this.ground.create(-32+(64*(i+1)), 300, 'ground');
-            this.layer.setSize(64, 64);
-            this.layer.setScale(2);
-            this.layer.immovable = true;
+        this.BG = this.physics.add.staticGroup();
+        //this.ground.enableBody = true;
+        for(var i = 0; i < 4; i++){
+            this.city = this.BG.create(100+(i*200), 300, 'cityoneBG');
+            this.city.setScale(1/4);
         }
-        this.physics.add.collider(this.ground, this.guy);
     }
 
     update() {

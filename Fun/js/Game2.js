@@ -17,15 +17,15 @@ class Game extends Phaser.Scene{
     }
 
     create() {
-        /*this.BG1 = this.physics.add.staticGroup();
+        this.BG1 = this.physics.add.staticGroup();
         for(var i = 0; i < 4; i++){
             this.city = this.BG1.create(200+(i*400), 300, 'cityoneBG');
             this.city.setCrop(0, 0, 800, 600);
             this.city.setScale(1/2);
-        }*/
+        }
         this.BG2 = this.physics.add.staticGroup();
         for(var i = 0; i < 4; i++){
-            this.forest = this.BG2.create((200+(i*400)), 300, 'cityoneBG');
+            this.forest = this.BG2.create(1600+(200+(i*400)), 300, 'cityoneBG');
             this.forest.setCrop(800, 0, 800, 600);
             this.forest.setScale(1/2);
         }

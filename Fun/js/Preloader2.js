@@ -27,6 +27,7 @@ class Preloader extends Phaser.Scene{
         this.load.image('ground', 'assets/ground.png');
         this.load.spritesheet('boots', 'assets/Boots walk.png', {frameWidth: 173, frameHeight: 419});
         this.load.image('girl', 'assets/Character.png');
+        this.load.image('cityoneBG', 'assets/cityoneBG.png');
         //  + lots of other required assets here
     }
 

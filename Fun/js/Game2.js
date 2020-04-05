@@ -17,8 +17,9 @@ class Game extends Phaser.Scene{
     }
 
     create() {
+        this.BG = this.add.image(0, 0, 'cityoneBG');
         this.boots = this.physics.add.sprite(400, 300, 'boots');
-        //this.boots.setScale(1/3);
+        this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
         this.girl = this.physics.add.sprite(400, 300, 'girl');
         this.girl.setScale(1/3);

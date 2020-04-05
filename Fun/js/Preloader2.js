@@ -28,6 +28,7 @@ class Preloader extends Phaser.Scene{
         this.load.spritesheet('boots', 'assets/Boots walk.png', {frameWidth: 173, frameHeight: 419});
         this.load.image('girl', 'assets/Character.png');
         this.load.image('cityoneBG', 'assets/cityoneBG.png');
+        this.load.image('buttons', 'assets/Buttons.png');
         //  + lots of other required assets here
     }
 
@@ -89,7 +90,7 @@ class Preloader extends Phaser.Scene{
         if (this.ready == false)
         {
             this.ready = true;
-            this.scene.start('Game');
+            this.scene.start('MainMenu');
         }
 
     }

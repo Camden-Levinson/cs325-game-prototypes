@@ -17,39 +17,34 @@ class Game extends Phaser.Scene{
     }
 
     create() {
-        this.boots = this.physics.add.sprite(400, 300, 'boots');
+        /*this.BG1 = this.physics.add.staticGroup();
+        for(var i = 0; i < 4; i++){
+            this.city = this.BG1.create(200+(i*400), 300, 'cityoneBG');
+            this.city.setCrop(0, 0, 800, 600);
+            this.city.setScale(1/2);
+        }*/
+        this.BG2 = this.physics.add.staticGroup();
+        for(var i = 0; i < 4; i++){
+            this.forest = this.BG2.create((200+(i*400)), 300, 'cityoneBG');
+            this.forest.setCrop(800, 0, 800, 600);
+            this.forest.setScale(1/2);
+        }
+        this.physics.world.setBounds(0, 0, 3200, 600);
+        this.cameras.main.setBounds(0, 0, 3200, 600);
+        this.boots = this.physics.add.sprite(400, 550, 'boots');
         this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
-        this.girl = this.physics.add.sprite(400, 300, 'girl');
-        this.girl.setScale(1/3);
-        this.girl.setCollideWorldBounds(true);
-        this.girl.visible = false;
-        this.idle = false;
         this.facing = "right";
-        this.timer = this.time.addEvent({delay: 10000});
         this.gameOver = false;
-        this.guy = this.physics.add.sprite(400, 300, 'guy');
-        this.guy.setSize(16, 32);
-        this.guy.setScale(4);
-        this.guy.setCollideWorldBounds(true);
-        this.guy.visible = false;
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.BG = this.physics.add.staticGroup();
-        //this.ground.enableBody = true;
-        for(var i = 0; i < 4; i++){
-            this.city = this.BG.create(100+(i*200), 300, 'cityoneBG');
-            this.city.setScale(1/4);
-        }
+        this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
     }
 
     update() {
         if(!this.gameOver){
             this.playerMovementManager();
         }
-        /*if(this.gameOver2 && !this.gameOver){
-            this.spawnLink();
-        }*/
         
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
@@ -64,21 +59,18 @@ class Game extends Phaser.Scene{
     playerMovementManager() {
         // Directional movement
         if(this.cursorKeys.left.isDown){
-            this.girl.visible = false;
             this.facing = "left";
-            this.boots.setVelocityX(-100);
+            this.boots.setVelocityX(-400);
             this.boots.flipX = true;
             this.boots.anims.play("boot_walk", true);
+            
         }else if(this.cursorKeys.right.isDown){
-            this.girl.visible = false;
             this.facing = "right";
-            this.boots.setVelocityX(100);
+            this.boots.setVelocityX(400);
             this.boots.flipX = false;
             this.boots.anims.play("boot_walk", true);
         }else{
             this.boots.setVelocityX(0);
-            this.girl.x = this.boots.x;
-            this.girl.y = this.boots.y;
         }
     }
 }

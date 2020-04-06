@@ -1,27 +1,17 @@
 "use strict";
 
-class Game extends Phaser.Scene{
+class Forest extends Phaser.Scene{
 
     constructor(){
-        super('Game');
-    }
-    
-    quitGame() {
-
-        //  Here you should destroy anything you no longer need.
-        //  Stop music, delete sprites, purge caches, free resources, all that good stuff.
-
-        //  Then let's go back to the main menu.
-        this.scene.start('MainMenu');
-
+        super('Forest');
     }
 
     create() {
-        this.BG1 = this.physics.add.staticGroup();
+        this.BG2 = this.physics.add.staticGroup();
         for(var i = 0; i < 4; i++){
-            this.city = this.BG1.create(400+(i*400), 300, 'cityoneBG');
-            this.city.setCrop(0, 0, 800, 600);
-            this.city.setScale(1/2);
+            this.forest = this.BG2.create((i*400), 300, 'cityoneBG');
+            this.forest.setCrop(800, 0, 800, 600);
+            this.forest.setScale(1/2);
         }
         this.physics.world.setBounds(0, 0, 1600, 600);
         this.cameras.main.setBounds(0, 0, 1600, 600);
@@ -66,8 +56,8 @@ class Game extends Phaser.Scene{
         }else{
             this.boots.setVelocityX(0);
         }
-        if(this.transKey.isDown && this.boots.x >= 1400){
-            this.scene.start('Forest');
+        if(this.transKey.isDown && this.boots.x <= 200){
+            this.scene.start('Game');
         }
     }
 }

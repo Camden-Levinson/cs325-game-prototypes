@@ -37,6 +37,7 @@ game.scene.add( 'Boot', new Boot());
 game.scene.add( 'Preloader', new Preloader() );
 game.scene.add( 'MainMenu', new MainMenu() );
 game.scene.add( 'Game', new Game() );
+game.scene.add( 'Forest', new Forest());
 
 //	Now start the Boot state.
 game.scene.start('Boot');

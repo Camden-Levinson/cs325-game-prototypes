@@ -7,7 +7,7 @@ class House extends Phaser.Scene{
     }
 
     create() {
-        this.add.image(100, 400, 'house');
+        this.add.image(300, 400, 'house');
         this.physics.world.setBounds(0, 0, 800, 600);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(100, 550, 'boots');
@@ -51,7 +51,7 @@ class House extends Phaser.Scene{
         }else{
             this.boots.setVelocityX(0);
         }
-        if(this.transKey.isDown && this.boots.x <= 700){
+        if(this.transKey.isDown && this.boots.x >= 700){
             this.scene.start('Game');
         }
     }

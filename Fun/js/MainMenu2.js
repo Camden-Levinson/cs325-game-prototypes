@@ -12,7 +12,7 @@ class MainMenu extends Phaser.Scene {
         music.stop();
 
         //	And start the actual game
-        this.scene.start('Game');
+        this.scene.start('House');
 
     }
     

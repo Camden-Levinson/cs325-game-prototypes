@@ -24,10 +24,9 @@ class House extends Phaser.Scene{
         this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
         this.ground = this.physics.add.staticGroup();
         for(var i = 0; i < 1600/64; i++){
-            this.layer = this.ground.create(32 + (i*64), 578, 'ground');
+            this.layer = this.ground.create(32 + (i*64), 578, 'grass');
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
-            this.layer.setCrop(0, 0, 32, 32);
             
         }
         this.physics.add.collider(this.boots, this.ground);

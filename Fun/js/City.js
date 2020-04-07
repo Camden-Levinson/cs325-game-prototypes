@@ -18,13 +18,13 @@ class Game extends Phaser.Scene{
 
     create() {
         this.BG1 = this.physics.add.staticGroup();
-        for(var i = 0; i < 4; i++){
+        for(var i = 0; i < 2; i++){
             this.city = this.BG1.create(400+(i*400), 300, 'cityoneBG');
             this.city.setCrop(0, 0, 800, 600);
             this.city.setScale(1/2);
         }
-        this.physics.world.setBounds(0, 0, 1600, 600);
-        this.cameras.main.setBounds(0, 0, 1600, 600);
+        this.physics.world.setBounds(0, 0, 800, 600);
+        this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(100, 400, 'boots');
         this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
@@ -35,13 +35,19 @@ class Game extends Phaser.Scene{
         this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
         this.ground = this.physics.add.staticGroup();
         for(var i = 0; i < 1600/64; i++){
-            this.layer = this.ground.create((i*64), 578, 'ground');
+            this.layer = this.ground.create(32+(i*64), 568, 'brick');
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
-            this.layer.setCrop(32, 0, 32, 32);
+        }
+        this.layer = this.ground.create(0, 550, 'brick')
+        this.layer.setSize(64, 64);
+        this.layer.setScale(2);
+        for(var i = 0; i < 2; i++){
+            this.layer = this.ground.create(400+(i*64), 400, 'brick');
+            this.layer.setSize(64, 64);
+            this.layer.setScale(2);
         }
         this.physics.add.collider(this.boots, this.ground);
-        console.log(this.boots.y);
     }
 
     update() {
@@ -78,7 +84,7 @@ class Game extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-400);
         }
-        if(this.transKey.isDown && this.boots.x >= 1400){
+        if(this.transKey.isDown && this.boots.x >= 700){
             this.scene.start('Forest');
         }
     }

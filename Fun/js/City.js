@@ -41,6 +41,7 @@ class Game extends Phaser.Scene{
             this.layer.setCrop(32, 0, 32, 32);
         }
         this.physics.add.collider(this.boots, this.ground);
+        console.log(this.boots.y);
     }
 
     update() {
@@ -73,6 +74,9 @@ class Game extends Phaser.Scene{
             this.boots.anims.play("boot_walk", true);
         }else{
             this.boots.setVelocityX(0);
+        }
+        if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
+            this.boots.setVelocityY(-400);
         }
         if(this.transKey.isDown && this.boots.x >= 1400){
             this.scene.start('Forest');

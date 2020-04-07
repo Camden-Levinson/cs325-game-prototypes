@@ -14,8 +14,8 @@ var config = {
     physics: {
         default: "arcade",
         arcade: {
-            debug: false,
-            gravity: { y: 1000 },
+            debug: true,
+            gravity: { y: 500 },
             overlapBias: 8
         }
     }

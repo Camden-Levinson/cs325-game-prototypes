@@ -24,7 +24,7 @@ class Preloader extends Phaser.Scene{
         this.load.image('Link', 'assets/title.jpg');
         this.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
         this.load.spritesheet('guy', 'assets/guy.png', {frameWidth: 16, frameHeight: 32});
-        this.load.image('ground', 'assets/ground.png');
+        this.load.image('ground', 'assets/ground1.png');
         this.load.spritesheet('boots', 'assets/Boots walk.png', {frameWidth: 173, frameHeight: 419});
         this.load.image('girl', 'assets/Character.png');
         this.load.image('cityoneBG', 'assets/cityoneBG.png');

@@ -19,8 +19,7 @@ class House extends Phaser.Scene{
         this.facing = "right";
         this.gameOver = false;
         this.cursorKeys = this.input.keyboard.createCursorKeys();
-        this.transKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.talkKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
         this.ground = this.physics.add.staticGroup();
         for(var i = 0; i < 1600/64; i++){
@@ -66,12 +65,12 @@ class House extends Phaser.Scene{
         }else{
             this.boots.setVelocityX(0);
         }
-        if(this.transKey.isDown && this.boots.x >= 700 && this.talked == true){
+        if(this.interactKey.isDown && this.boots.x >= 700 && this.talked == true){
             this.scene.start('Game');
         }
     }
     textBox(){
-        if(this.talkKey.isDown && this.talked == false){
+        if(this.interactKey.isDown && this.talked == false){
             this.add.text(this.Link.x, this.Link.y-100, 'Hello Traveler', { font: '12px Arial', fill: '#000000' });
             this.talked = true;
         }

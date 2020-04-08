@@ -7,7 +7,7 @@ class Control extends Phaser.Scene{
     }
 
     create() {
-        this.add.text(100, 100, "Left and Right Arrow keys to move\nUp Arrow to jump\nSpace to interact", { font: '48px Arial', fill: '#000000' });
+        this.add.text(50, 100, "Left and Right Arrow keys to move\nUp Arrow to jump\nSpace to interact", { font: '48px Arial', fill: '#000000' });
         this.back = this.add.image(100, 450, 'back');
         this.back.setScale(1.5);
         this.back.setInteractive();

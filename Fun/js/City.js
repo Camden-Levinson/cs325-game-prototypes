@@ -39,9 +39,12 @@ class Game extends Phaser.Scene{
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
         }
-        this.layer = this.ground.create(0, 550, 'brick')
-        this.layer.setSize(64, 64);
-        this.layer.setScale(2);
+        this.layer1 = this.ground.create(0, 550, 'brick')
+        this.layer1.setSize(64, 64);
+        this.layer1.setScale(2);
+        this.layer2 = this.ground.create(200, 500, 'brick')
+        this.layer2.setSize(64, 64);
+        this.layer2.setScale(2);
         for(var i = 0; i < 2; i++){
             this.layer = this.ground.create(400+(i*64), 400, 'brick');
             this.layer.setSize(64, 64);
@@ -82,7 +85,7 @@ class Game extends Phaser.Scene{
             this.boots.setVelocityX(0);
         }
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
-            this.boots.setVelocityY(-400);
+            this.boots.setVelocityY(-500);
         }
         if(this.transKey.isDown && this.boots.x >= 700){
             this.scene.start('Forest');

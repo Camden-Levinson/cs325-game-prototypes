@@ -9,8 +9,7 @@ class MainMenu extends Phaser.Scene {
     startGame(music) {
 
         //	Ok, the Play Button has been clicked or touched, so let's stop the music (otherwise it'll carry on playing)
-        //music.stop();
-
+        music.stop();
         //	And start the actual game
         this.scene.start('House');
 
@@ -23,6 +22,8 @@ class MainMenu extends Phaser.Scene {
         //	Naturally I expect you to do something significantly better :)
 
         var music = this.sound.add('titleMusic');
+        music.mute = true;
+        music.mute = false;
         music.play();
 
         this.add.sprite(700, 300, 'girl');
@@ -36,7 +37,7 @@ class MainMenu extends Phaser.Scene {
         this.start.setInteractive();
         this.start.on('pointerdown', () => this.startGame(music));
         this.controls.setInteractive();
-        this.controls.on('pointerdown', () => this.scene.start('Control'));
+        this.controls.on('pointerdown', () => this.control(music));
 
     }
 
@@ -44,6 +45,10 @@ class MainMenu extends Phaser.Scene {
 
         //	Do some nice funky main menu effect here
 
+    }
+    control(music){
+        music.stop();
+        this.scene.start('Control');
     }
 }
 //export default MainMenu;

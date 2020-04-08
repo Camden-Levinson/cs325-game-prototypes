@@ -15,7 +15,6 @@ class Control extends Phaser.Scene{
     }
 
     update() {
-        
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
         

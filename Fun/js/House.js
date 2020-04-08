@@ -8,7 +8,7 @@ class House extends Phaser.Scene{
 
     create() {
         this.talked = false;
-        this.add.image(300, 400, 'house');
+        this.add.image(100, 400, 'house');
         this.Link = this.physics.add.sprite(700, 500, 'Link')
         this.Link.setScale(1/8);
         this.physics.world.setBounds(0, 0, 800, 600);

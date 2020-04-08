@@ -39,6 +39,7 @@ game.scene.add( 'MainMenu', new MainMenu() );
 game.scene.add( 'Game', new Game() );
 game.scene.add( 'House', new House());
 game.scene.add( 'Forest', new Forest());
+game.scene.add('Control', new Control());
 //	Now start the Boot state.
 game.scene.start('Boot');
 

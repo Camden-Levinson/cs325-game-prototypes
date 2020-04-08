@@ -26,17 +26,17 @@ class MainMenu extends Phaser.Scene {
         music.play();
 
         this.add.sprite(700, 300, 'girl');
-        this.start = this.add.image(200, 450, 'buttons');
-        this.start.setCrop(0, 0, 100, 50);
+        this.start = this.add.image(200, 450, 'Start');
         this.start.setScale(1.5);
-        this.controls = this.add.image(200, 475, 'buttons');
-        this.controls.setCrop(0, 50, 100, 50);
+        this.controls = this.add.image(200, 475, 'Control');
         this.controls.setScale(1.5);
         this.add.text(50, 100, 'Legend of the\n \n Dark Wanderer', { font: '56px Arial', fill: '#000000' });
         //this.add.text(100, 500, 'Space to eat\narrow keys to move and jump',{ font: '18px Arial', fill: '#000000' });
         //var playButton = this.add.text( 100, 450, 'Start Game', { font: '48px Arial', fill: '#000000' });
         this.start.setInteractive();
         this.start.on('pointerdown', () => this.startGame(music));
+        this.controls.setInteractive();
+        this.controls.on('pointerdown', () => this.scene.start('Control'));
 
     }
 

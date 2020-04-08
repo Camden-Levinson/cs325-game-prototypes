@@ -77,9 +77,9 @@ class Forest extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-500);
         }
-        //if(this.interactKey.isDown && this.boots.x <= 700){
-          //  this.scene.start('End');
-        //}
+        if(this.interactKey.isDown && this.boots.x >= 700){
+            this.scene.start('End');
+        }
     }
 }
 //export default Game;

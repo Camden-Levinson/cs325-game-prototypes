@@ -9,7 +9,7 @@ class City extends Phaser.Scene{
     create() {
         this.BG1 = this.physics.add.staticGroup();
         for(var i = 0; i < 2; i++){
-            this.city = this.BG1.create(400+(i*400), 300, 'cityBG');
+            this.city = this.BG1.create(200+(i*400), 300, 'cityBG');
             this.city.setScale(1/2);
         }
         this.physics.world.setBounds(0, 0, 800, 600);

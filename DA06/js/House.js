@@ -63,7 +63,7 @@ class House extends Phaser.Scene{
             this.boots.setVelocityX(0);
         }
         if(this.interactKey.isDown && this.boots.x >= 700 && this.talked == true){
-            this.scene.start('Game');
+            this.scene.start('City');
         }
     }
     textBox(){

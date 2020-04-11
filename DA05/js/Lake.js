@@ -1,15 +1,15 @@
 "use strict";
 
-class City extends Phaser.Scene{
+class Lake extends Phaser.Scene{
 
     constructor(){
-        super('City');
+        super('Lake');
     }
 
     create() {
-        this.BG1 = this.physics.add.staticGroup();
+        this.BG = this.physics.add.staticGroup();
         for(var i = 0; i < 2; i++){
-            this.city = this.BG1.create(400+(i*400), 300, 'cityBG');
+            this.city = this.BG1.create(400+(i*400), 300, 'lakeBG');
             this.city.setScale(1/2);
         }
         this.physics.world.setBounds(0, 0, 800, 600);
@@ -25,17 +25,6 @@ class City extends Phaser.Scene{
         this.ground = this.physics.add.staticGroup();
         for(var i = 0; i < 1600/64; i++){
             this.layer = this.ground.create(32+(i*64), 568, 'brick');
-            this.layer.setSize(64, 64);
-            this.layer.setScale(2);
-        }
-        this.layer1 = this.ground.create(0, 550, 'brick')
-        this.layer1.setSize(64, 64);
-        this.layer1.setScale(2);
-        this.layer2 = this.ground.create(200, 500, 'brick')
-        this.layer2.setSize(64, 64);
-        this.layer2.setScale(2);
-        for(var i = 0; i < 2; i++){
-            this.layer = this.ground.create(400+(i*64), 400, 'brick');
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
         }

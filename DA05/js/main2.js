@@ -39,6 +39,7 @@ game.scene.add( 'MainMenu', new MainMenu() );
 game.scene.add( 'Game', new Game() );
 game.scene.add( 'House', new House());
 game.scene.add( 'Forest', new Forest());
+game.scene.add( 'Lake', new Lake());
 game.scene.add('Control', new Control());
 game.scene.add('End', new End());
 //	Now start the Boot state.

@@ -14,8 +14,7 @@ class Forest extends Phaser.Scene{
     create() {
         this.BG2 = this.physics.add.staticGroup();
         for(var i = 0; i < 2; i++){
-            this.forest = this.BG2.create((i*400), 300, 'cityoneBG');
-            this.forest.setCrop(800, 0, 800, 600);
+            this.forest = this.BG2.create((i*400), 300, 'forestBG');
             this.forest.setScale(1/2);
         }
         this.physics.world.setBounds(0, -200, 800, 800);

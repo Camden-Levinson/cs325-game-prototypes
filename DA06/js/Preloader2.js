@@ -31,6 +31,7 @@ class Preloader extends Phaser.Scene{
         this.load.image('cityBG', 'assets/CityBG.png');
         this.load.image('forestBG', 'assets/ForestBG.png');
         this.load.image('lakeBG', 'assets/LakeBG.png');
+        this.load.image('mountainBG', 'assets/Mountain.png');
         this.load.image('start', 'assets/Start.png');
         this.load.image('control', 'assets/Control.png');
         this.load.image('back', 'assets/Back.png');

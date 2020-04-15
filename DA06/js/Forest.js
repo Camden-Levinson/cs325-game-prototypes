@@ -17,6 +17,7 @@ class Forest extends Phaser.Scene{
             this.forest = this.BG2.create(200+(i*400), 300, 'forestBG');
             this.forest.setScale(1/2);
         }
+        this.house = this.physics.add.sprite(500, 356, 'fhouse');
         this.physics.world.setBounds(0, -200, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(100, 400, 'boots');
@@ -40,6 +41,8 @@ class Forest extends Phaser.Scene{
         this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
         this.physics.add.collider(this.boots, this.ground);
+        this.physics.add.collider(this.house, this.ground);
+        this.physics.add.overlap(this.house, this.boots, this.main, null, this);
     }
 
     update() {
@@ -78,6 +81,11 @@ class Forest extends Phaser.Scene{
         }
         if(this.interactKey.isDown && this.boots.x >= 700){
             this.scene.start('Lake');
+        }
+    }
+    main(){
+        if(this.interactKey.isDown){
+            this.scene.start('MainMenu');
         }
     }
 }

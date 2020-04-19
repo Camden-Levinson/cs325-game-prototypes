@@ -13,6 +13,7 @@ class Lake extends Phaser.Scene{
             this.lake.setScale(1/2);
         }
         this.house = this.physics.add.sprite(600, 360, 'lhouse');
+        this.house.setScale(1/2);
         this.physics.world.setBounds(0, 0, 800, 600);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(100, 400, 'boots');
@@ -21,7 +22,7 @@ class Lake extends Phaser.Scene{
         this.facing = "right";
         this.gameOver = false;
         this.cursorKeys = this.input.keyboard.createCursorKeys();
-        this.transKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
         this.ground = this.physics.add.staticGroup();
         for(var i = 0; i < 1600/64; i++){
@@ -68,8 +69,13 @@ class Lake extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-500);
         }
-        if(this.transKey.isDown && this.boots.x >= 700){
+        if(this.interactKey.isDown && this.boots.x >= 700){
             this.scene.start('Mountain');
+        }
+    }
+    main(){
+        if(this.interactKey.isDown){
+            this.scene.start('MainMenu');
         }
     }
 }

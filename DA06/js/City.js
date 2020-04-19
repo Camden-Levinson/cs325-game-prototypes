@@ -13,6 +13,7 @@ class City extends Phaser.Scene{
             this.city.setScale(1/2);
         }
         this.house = this.physics.add.sprite(600, 360, 'chouse');
+        this.house.setScale(1/2);
         this.physics.world.setBounds(0, 0, 800, 600);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(100, 400, 'boots');

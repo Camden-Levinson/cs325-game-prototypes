@@ -18,6 +18,7 @@ class Mountain extends Phaser.Scene{
             this.forest.setScale(1/2);
         }
         this.house = this.physics.add.sprite(500, 374, 'mhouse');
+        this.house.setScale(1/2);
         this.physics.world.setBounds(0, -200, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(100, 400, 'boots');

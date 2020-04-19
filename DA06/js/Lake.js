@@ -12,6 +12,7 @@ class Lake extends Phaser.Scene{
             this.lake = this.BG.create(200+(i*400), 300, 'lakeBG');
             this.lake.setScale(1/2);
         }
+        this.house = this.physics.add.sprite(600, 360, 'lhouse');
         this.physics.world.setBounds(0, 0, 800, 600);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(100, 400, 'boots');
@@ -29,6 +30,8 @@ class Lake extends Phaser.Scene{
             this.layer.setScale(2);
         }
         this.physics.add.collider(this.boots, this.ground);
+        this.physics.add.collider(this.house, this.ground);
+        this.physics.add.overlap(this.house, this.boots, this.main, null, this);
     }
 
     update() {

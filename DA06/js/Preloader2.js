@@ -26,12 +26,14 @@ class Preloader extends Phaser.Scene{
         this.load.spritesheet('guy', 'assets/guy.png', {frameWidth: 16, frameHeight: 32});
         this.load.image('grass', 'assets/Grass.png');
         this.load.image('brick', 'assets/Brick.png');
+        this.load.image('sand', 'assets/Sand.png');
         this.load.spritesheet('boots', 'assets/Boots walk.png', {frameWidth: 173, frameHeight: 419});
         this.load.image('girl', 'assets/Character.png');
         this.load.image('cityBG', 'assets/CityBG.png');
         this.load.image('forestBG', 'assets/ForestBG.png');
         this.load.image('lakeBG', 'assets/LakeBG.png');
         this.load.image('mountainBG', 'assets/Mountain.png');
+        this.load.image('overworld', 'assets/Overworld.png');
         this.load.image('start', 'assets/Start.png');
         this.load.image('control', 'assets/Control.png');
         this.load.image('back', 'assets/Back.png');
@@ -40,6 +42,7 @@ class Preloader extends Phaser.Scene{
         this.load.image('mhouse', 'assets/MHouse.png');
         this.load.image('chouse', 'assets/CHouse.png');
         this.load.image('lhouse', 'assets/LHouse.png');
+        this.load.image('c', 'assets/Char_world.png');
         //  + lots of other required assets here
     }
 
@@ -48,36 +51,6 @@ class Preloader extends Phaser.Scene{
         //  Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes
         this.preloadBar.cropEnabled = false;
         
-        this.anims.create({
-            key: "guy_idle",
-            frames: this.anims.generateFrameNumbers('guy', { start: 0, end: 3 }),
-            frameRate: 1,
-            repeat: -1
-        });
-        this.anims.create({
-            key: "guy_yawn",
-            frames: this.anims.generateFrameNumbers('guy', { start: 8, end: 11 }),
-            frameRate: 1,
-            repeat: -1
-        });
-        this.anims.create({
-            key: "guy_walk",
-            frames: this.anims.generateFrameNumbers('guy', { start: 4, end: 7 }),
-            frameRate: 1,
-            repeat: -1
-        });
-        this.anims.create({
-            key: "guy_wall",
-            frames: this.anims.generateFrameNumbers('guy', { start: 13, end: 14 }),
-            frameRate: 1,
-            repeat: -1
-        });
-        this.anims.create({
-            key: "guy_jump",
-            frames: [ { key: 'guy', frame: 12} ],
-            frameRate: 1,
-            repeat: -1
-        });
         this.anims.create({
             key: "boot_walk",
             frames: this.anims.generateFrameNumbers('boots', { start: 0, end: 7 }),

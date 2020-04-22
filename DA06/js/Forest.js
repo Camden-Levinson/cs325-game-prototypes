@@ -13,14 +13,14 @@ class Forest extends Phaser.Scene{
 
     create() {
         this.BG2 = this.physics.add.staticGroup();
-        for(var i = 0; i < 2; i++){
+        for(var i = 0; i < 4; i++){
             this.forest = this.BG2.create(200+(i*400), 300, 'forestBG');
             this.forest.setScale(1/2);
         }
         this.house = this.physics.add.sprite(500, 356, 'fhouse');
         this.house.setScale(1/2);
-        this.physics.world.setBounds(0, -200, 800, 800);
-        this.cameras.main.setBounds(0, 0, 800, 600);
+        this.physics.world.setBounds(0, -200, 1690, 800);
+        this.cameras.main.setBounds(0, 0, 1600, 600);
         this.boots = this.physics.add.sprite(100, 400, 'boots');
         this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
@@ -78,9 +78,9 @@ class Forest extends Phaser.Scene{
             this.boots.setVelocityX(0);
         }
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
-            this.boots.setVelocityY(-500);
+            this.boots.setVelocityY(-600);
         }
-        if(this.interactKey.isDown && this.boots.x >= 700){
+        if(this.boots.x >= 1640){
             this.scene.start('Lake');
         }
     }

@@ -11,7 +11,7 @@ class House extends Phaser.Scene{
         this.add.image(200, 330, 'house');
         this.Link = this.physics.add.sprite(450, 450, 'Link')
         this.Link.setScale(1/8);
-        this.physics.world.setBounds(0, 0, 800, 600);
+        this.physics.world.setBounds(0, 0, 890, 600);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(100, 400, 'boots');
         this.boots.setScale(1/2);
@@ -62,8 +62,8 @@ class House extends Phaser.Scene{
         }else{
             this.boots.setVelocityX(0);
         }
-        if(this.interactKey.isDown && this.boots.x >= 700 && this.talked == true){
-            this.scene.start('City');
+        if(this.boots.x >= 840 && this.talked == true){
+            this.scene.start('Overworld');
         }
     }
     textBox(){

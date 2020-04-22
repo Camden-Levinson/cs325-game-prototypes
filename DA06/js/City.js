@@ -1,4 +1,9 @@
 "use strict";
+function addBlock(x, y, ground){
+    game.layer = ground.create(x, y, 'grass');
+    game.layer.setSize(64, 64);
+    game.layer.setScale(2);
+}
 
 class City extends Phaser.Scene{
 
@@ -8,14 +13,14 @@ class City extends Phaser.Scene{
 
     create() {
         this.BG1 = this.physics.add.staticGroup();
-        for(var i = 0; i < 2; i++){
+        for(var i = 0; i < 4; i++){
             this.city = this.BG1.create(200+(i*400), 300, 'cityBG');
             this.city.setScale(1/2);
         }
         this.house = this.physics.add.sprite(600, 360, 'chouse');
         this.house.setScale(1/2);
-        this.physics.world.setBounds(0, 0, 800, 600);
-        this.cameras.main.setBounds(0, 0, 800, 600);
+        this.physics.world.setBounds(0, 0, 1690, 600);
+        this.cameras.main.setBounds(0, 0, 1600, 600);
         this.boots = this.physics.add.sprite(100, 400, 'boots');
         this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
@@ -25,7 +30,7 @@ class City extends Phaser.Scene{
         this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
         this.ground = this.physics.add.staticGroup();
-        for(var i = 0; i < 1600/64; i++){
+        for(var i = 0; i < 1728/64; i++){
             this.layer = this.ground.create(32+(i*64), 568, 'brick');
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
@@ -80,7 +85,7 @@ class City extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-500);
         }
-        if(this.interactKey.isDown && this.boots.x >= 700){
+        if(this.boots.x >= 1640){
             this.scene.start('Forest');
         }
     }

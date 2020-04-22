@@ -14,15 +14,11 @@ var config = {
     physics: {
         default: "arcade",
         arcade: {
-            debug: false,
-            gravity: { y: 800 },
+            debug: true,
+            gravity: { y: 1000 },
             overlapBias: 1
         }
     }
-}
-var gameSettings = {
-    playerSpeed: 300,
-    playerJumpVelocity: -400
 }
 
 var game = new Phaser.Game(config);

@@ -81,7 +81,7 @@ class Forest extends Phaser.Scene{
             this.boots.setVelocityY(-600);
         }
         if(this.boots.x >= 1640){
-            this.scene.start('Lake');
+            this.scene.start('Overworld');
         }
     }
     main(){

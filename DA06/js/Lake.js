@@ -75,7 +75,7 @@ class Lake extends Phaser.Scene{
             this.boots.setVelocityY(-600);
         }
         if(this.boots.x >= 1640){
-            this.scene.start('Mountain');
+            this.scene.start('Overworld');
         }
     }
     main(){

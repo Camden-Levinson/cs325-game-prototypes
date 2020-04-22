@@ -10,7 +10,6 @@ class Mountain extends Phaser.Scene{
         super('Mountain');
     }
     
-
     create() {
         this.BG2 = this.physics.add.staticGroup();
         for(var i = 0; i < 4; i++){
@@ -81,7 +80,7 @@ class Mountain extends Phaser.Scene{
             this.boots.setVelocityY(-600);
         }
         if( this.boots.x >= 1640){
-            this.scene.start('End');
+            this.scene.start('Overworld');
         }
     }
     main(){

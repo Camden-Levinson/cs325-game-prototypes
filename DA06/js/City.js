@@ -86,7 +86,7 @@ class City extends Phaser.Scene{
             this.boots.setVelocityY(-500);
         }
         if(this.boots.x >= 1640){
-            this.scene.start('Forest');
+            this.scene.start('Overworld');
         }
     }
     main(){

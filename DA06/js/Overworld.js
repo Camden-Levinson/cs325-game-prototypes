@@ -5,10 +5,6 @@ class Overworld extends Phaser.Scene{
     constructor(){
         super('Overworld');
     }
-    //City: 271 389, 345 463
-    //Forest: 624 188, 667 272
-    //Lake: 544 390, 606 444
-    //Mountain: 407 157, 466 218
 
     create() {
         this.gameOver = false;
@@ -18,7 +14,6 @@ class Overworld extends Phaser.Scene{
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.physics.world.setBounds(0, 0, 800, 600);
     }
-
     update() {
         if(!this.gameOver){
             this.playerMovementManager();
@@ -34,6 +29,9 @@ class Overworld extends Phaser.Scene{
         }
         if((this.char.x >= 407 && this.char.x <= 466) && (this.char.y >= 157 && this.char.y <= 218)){
             this.scene.start('Mountain');
+        }
+        if((this.char.x >= 53 && this.char.x <= 117) && (this.char.y >= 13 && this.char.y <= 109)){
+            this.scene.start('End');
         }
         
 

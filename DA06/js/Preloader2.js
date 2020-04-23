@@ -43,6 +43,7 @@ class Preloader extends Phaser.Scene{
         this.load.image('chouse', 'assets/CHouse.png');
         this.load.image('lhouse', 'assets/LHouse.png');
         this.load.image('c', 'assets/Char_world.png');
+        this.load.image('banner', 'assets/Banner.png');
         //  + lots of other required assets here
     }
 

@@ -7,6 +7,7 @@ class House extends Phaser.Scene{
     }
 
     create() {
+        this.count = 0;
         this.talked = false;
         this.add.image(200, 330, 'house');
         this.Link = this.physics.add.sprite(450, 450, 'Link')
@@ -27,6 +28,7 @@ class House extends Phaser.Scene{
             this.layer.setScale(2);
             
         }
+        this.text = this.add.text(50, 536, '', { font: '48px Arial', fill: '#000000' });
         this.physics.add.collider(this.boots, this.ground);
         this.physics.add.collider(this.Link, this.ground);
         this.physics.add.overlap(this.boots, this.Link, this.textBox, null, this);
@@ -36,8 +38,9 @@ class House extends Phaser.Scene{
         if(!this.gameOver){
             this.playerMovementManager();
         }
-
-        
+        if(this.interactKey.isDown){
+            this.count += 1;
+        }
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
         
@@ -67,9 +70,15 @@ class House extends Phaser.Scene{
         }
     }
     textBox(){
-        if(this.interactKey.isDown && this.talked == false){
-            this.add.text(this.Link.x, this.Link.y-100, 'Hello Traveler', { font: '12px Arial', fill: '#000000' });
+        this.box = this.add.image(400, 568, 'banner');
+        this.text.setDepth(100);
+        if(this.interactKey.isDown && this.count >= 10){
+            this.text.setText('Proceed to the right to go to overworld');
+            this.text.setFontSize('32px');
             this.talked = true;
+        }
+        if(this.interactKey.isDown && this.count == 0){
+            this.text.setText('Hello Traveller');
         }
     }
 }

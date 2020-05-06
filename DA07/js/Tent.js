@@ -60,7 +60,7 @@ class Tent extends Phaser.Scene{
         }else if(this.cursorKeys.down.isDown){
             this.boots.y += 4;
         }else{
-            this.boots.anims.play("boots_side", true);
+            this.boots.anims.play("boot_side", true);
         }
     }
     main(){

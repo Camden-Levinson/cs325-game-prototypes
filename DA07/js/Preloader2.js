@@ -65,7 +65,7 @@ class Preloader extends Phaser.Scene{
         });
         this.anims.create({
             key: "boot_side",
-            frames: [ { key: 'side', frame: 0 } ],
+            frames: [ { key: 'boots', frame: 8 } ],
             frameRate: 4,
             repeat: -1
         });

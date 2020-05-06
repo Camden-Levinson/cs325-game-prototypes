@@ -9,7 +9,8 @@ class Tent extends Phaser.Scene{
     create() {
         //this.add.text(50, 100, "Congrats you have made it through the city and forest\nCome back next week for a content update", { font: '24px Arial', fill: '#000000' });
         //this.add.text(50, 400, "Enter house to go\nback to Main Menu", { font: '24px Arial', fill: '#000000' });
-        this.tent = this.physics.add.image(400, 300, 'house');
+        this.gravity = 0;
+        this.tent = this.add.image(400, 300, 'tin');
         this.ground = this.physics.add.staticGroup();
         this.physics.world.setBounds(0, 0, 800, 600);
         this.cameras.main.setBounds(0, 0, 800, 600);

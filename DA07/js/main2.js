@@ -40,6 +40,9 @@ game.scene.add( 'Mountain', new Mountain());
 game.scene.add( 'Overworld', new Overworld());
 game.scene.add('Control', new Control());
 game.scene.add('Tent', new Tent());
+game.scene.add('Building', new Building());
+game.scene.add('Flower', new Flower());
+game.scene.add('Cave', new Cave());
 game.scene.add('End', new End());
 //	Now start the Boot state.
 game.scene.start('Boot');

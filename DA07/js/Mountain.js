@@ -4,6 +4,9 @@ function addBlock(x, y, ground){
     game.layer.setSize(64, 64);
     game.layer.setScale(2);
 }
+var x = 100;
+var y = 400;
+
 class Mountain extends Phaser.Scene{
 
     constructor(){
@@ -80,12 +83,16 @@ class Mountain extends Phaser.Scene{
             this.boots.setVelocityY(-600);
         }
         if( this.boots.x >= 1640){
+            x = 100;
+            y = 400;
             this.scene.start('Overworld');
         }
     }
     main(){
         if(this.interactKey.isDown){
-            this.scene.start('MainMenu');
+            x = this.boots.x;
+            y = this.boots.y;
+            this.scene.start('Cave');
         }
     }
 }

@@ -1,15 +1,15 @@
 "use strict";
 
-class Tent extends Phaser.Scene{
+class Flower extends Phaser.Scene{
 
     constructor(){
-        super('Tent');
+        super('Flower');
     }
 
     create() {
         //this.add.text(50, 100, "Congrats you have made it through the city and forest\nCome back next week for a content update", { font: '24px Arial', fill: '#000000' });
         //this.add.text(50, 400, "Enter house to go\nback to Main Menu", { font: '24px Arial', fill: '#000000' });
-        this.tent = this.add.image(400, 300, 'tin');
+        this.tent = this.add.image(400, 300, 'fin');
         this.ground = this.physics.add.staticGroup();
         this.physics.world.setBounds(0, 0, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);
@@ -33,7 +33,7 @@ class Tent extends Phaser.Scene{
             this.playerMovementManager();
         }
         if(this.boots.y > 700){
-            this.scene.start('Lake');
+            this.scene.start('Forest');
         }
         
 

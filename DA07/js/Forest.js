@@ -4,6 +4,8 @@ function addBlock(x, y, ground){
     game.layer.setSize(64, 64);
     game.layer.setScale(2);
 }
+var x = 100;
+var y = 400;
 class Forest extends Phaser.Scene{
 
     constructor(){
@@ -18,10 +20,9 @@ class Forest extends Phaser.Scene{
             this.forest.setScale(1/2);
         }
         this.house = this.physics.add.sprite(500, 356, 'fhouse');
-        this.house.setScale(1/2);
         this.physics.world.setBounds(0, -200, 1690, 800);
         this.cameras.main.setBounds(0, 0, 1600, 600);
-        this.boots = this.physics.add.sprite(100, 400, 'boots');
+        this.boots = this.physics.add.sprite(x, y, 'boots');
         this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
         this.facing = "right";
@@ -81,12 +82,16 @@ class Forest extends Phaser.Scene{
             this.boots.setVelocityY(-600);
         }
         if(this.boots.x >= 1640){
+            x = 100;
+            y = 400;
             this.scene.start('Overworld');
         }
     }
     main(){
         if(this.interactKey.isDown){
-            this.scene.start('MainMenu');
+            x = this.boots.x;
+            y = this.boots.y;
+            this.scene.start('Flower');
         }
     }
 }

@@ -1,15 +1,15 @@
 "use strict";
 
-class Tent extends Phaser.Scene{
+class Cave extends Phaser.Scene{
 
     constructor(){
-        super('Tent');
+        super('Cave');
     }
 
     create() {
         //this.add.text(50, 100, "Congrats you have made it through the city and forest\nCome back next week for a content update", { font: '24px Arial', fill: '#000000' });
         //this.add.text(50, 400, "Enter house to go\nback to Main Menu", { font: '24px Arial', fill: '#000000' });
-        this.tent = this.add.image(400, 300, 'tin');
+        this.tent = this.add.image(400, 300, 'cin');
         this.ground = this.physics.add.staticGroup();
         this.physics.world.setBounds(0, 0, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);
@@ -33,7 +33,7 @@ class Tent extends Phaser.Scene{
             this.playerMovementManager();
         }
         if(this.boots.y > 700){
-            this.scene.start('Lake');
+            this.scene.start('Mountain');
         }
         
 
@@ -85,5 +85,11 @@ class Tent extends Phaser.Scene{
         }else{
             this.boots.anims.play("boot_side", true);
         }
+    }
+    main(){
+        if(this.interactKey.isDown){
+           this.scene.start('MainMenu'); 
+        }
+        
     }
 }

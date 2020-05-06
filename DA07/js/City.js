@@ -4,6 +4,8 @@ function addBlock(x, y, ground){
     game.layer.setSize(64, 64);
     game.layer.setScale(2);
 }
+var x = 100;
+var y = 400;
 
 class City extends Phaser.Scene{
 
@@ -17,10 +19,10 @@ class City extends Phaser.Scene{
             this.city = this.BG1.create(200+(i*400), 300, 'cityBG');
             this.city.setScale(1/2);
         }
-        this.house = this.physics.add.sprite(600, 360, 'chouse');
+        this.house = this.physics.add.sprite(200, 360, 'chouse');
         this.physics.world.setBounds(0, 0, 1690, 600);
         this.cameras.main.setBounds(0, 0, 1600, 600);
-        this.boots = this.physics.add.sprite(100, 400, 'boots');
+        this.boots = this.physics.add.sprite(x, y, 'boots');
         this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
         this.facing = "right";
@@ -31,17 +33,6 @@ class City extends Phaser.Scene{
         this.ground = this.physics.add.staticGroup();
         for(var i = 0; i < 1728/64; i++){
             this.layer = this.ground.create(32+(i*64), 568, 'brick');
-            this.layer.setSize(64, 64);
-            this.layer.setScale(2);
-        }
-        this.layer1 = this.ground.create(0, 550, 'brick')
-        this.layer1.setSize(64, 64);
-        this.layer1.setScale(2);
-        this.layer2 = this.ground.create(200, 500, 'brick')
-        this.layer2.setSize(64, 64);
-        this.layer2.setScale(2);
-        for(var i = 0; i < 2; i++){
-            this.layer = this.ground.create(400+(i*64), 400, 'brick');
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
         }
@@ -85,12 +76,16 @@ class City extends Phaser.Scene{
             this.boots.setVelocityY(-500);
         }
         if(this.boots.x >= 1640){
+            x = 400;
+            y = 100;
             this.scene.start('Overworld');
         }
     }
     main(){
         if(this.interactKey.isDown){
-            this.scene.start('MainMenu');
+            x = this.boots.x;
+            y = this.boots.y;
+            this.scene.start('Building');
         }
     }
 }

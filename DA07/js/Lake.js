@@ -4,7 +4,8 @@ function addBlock(x, y, ground){
     game.layer.setSize(64, 64);
     game.layer.setScale(2);
 }
-
+var x = 100;
+var y = 400;
 class Lake extends Phaser.Scene{
 
     constructor(){
@@ -18,10 +19,9 @@ class Lake extends Phaser.Scene{
             this.lake.setScale(1/2);
         }
         this.house = this.physics.add.sprite(600, 360, 'lhouse');
-        this.house.setScale(1/2);
         this.physics.world.setBounds(0, 0, 1690, 600);
         this.cameras.main.setBounds(0, 0, 1600, 600);
-        this.boots = this.physics.add.sprite(100, 400, 'boots');
+        this.boots = this.physics.add.sprite(x, y, 'boots');
         this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
         this.facing = "right";
@@ -75,11 +75,15 @@ class Lake extends Phaser.Scene{
             this.boots.setVelocityY(-600);
         }
         if(this.boots.x >= 1640){
+            x = 100;
+            y = 400;
             this.scene.start('Overworld');
         }
     }
     main(){
         if(this.interactKey.isDown){
+            x = this.boots.x;
+            y = this.boots.y;
             this.scene.start('Tent');
         }
     }

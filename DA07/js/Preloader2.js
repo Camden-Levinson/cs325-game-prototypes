@@ -27,7 +27,7 @@ class Preloader extends Phaser.Scene{
         this.load.image('grass', 'assets/Grass.png');
         this.load.image('brick', 'assets/Brick.png');
         this.load.image('sand', 'assets/Sand.png');
-        this.load.spritesheet('boots', 'assets/Boots walk.png', {frameWidth: 173, frameHeight: 419});
+        this.load.spritesheet('boots', 'assets/Bootswalk1.png', {frameWidth: 173, frameHeight: 419});
         this.load.image('girl', 'assets/Character.png');
         this.load.image('cityBG', 'assets/CityBG.png');
         this.load.image('forestBG', 'assets/ForestBG.png');
@@ -65,6 +65,12 @@ class Preloader extends Phaser.Scene{
         this.anims.create({
             key: "boot_side",
             frames: [ { key: 'boots', frame: 8 } ],
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "boot_forward",
+            frames: [ { key: 'boots', frame: 9 } ],
             frameRate: 4,
             repeat: -1
         });

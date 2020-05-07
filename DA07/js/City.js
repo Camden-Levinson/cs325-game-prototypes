@@ -3,6 +3,7 @@ function addBlockC(x, y, ground){
     game.layer = ground.create(x, y, 'brick');
     game.layer.setSize(64, 64);
     game.layer.setScale(2);
+    return game.layer;
 }
 var x = 100;
 var y = 400;
@@ -19,6 +20,9 @@ class City extends Phaser.Scene{
             this.city = this.BG1.create(200+(i*400), 300, 'cityBG');
             this.city.setScale(1/2);
         }
+        this.hasKey = false;
+        this.key = this.add.image(672, 32, 'key');
+        this.gate = this.physics.add.image(768, 232, 'gate');
         this.house = this.physics.add.sprite(200, 361, 'chouse');
         this.physics.world.setBounds(0, -200, 1690, 800);
         this.cameras.main.setBounds(0, 0, 1600, 700);
@@ -39,7 +43,7 @@ class City extends Phaser.Scene{
             addBlockC(640+(i*64), 344, this.ground);
         }
         for(var i = 0; i < 4; i++){
-            addBlockC(640+(i*64), 116, this.ground);
+            addBlockC(640+(i*64), 120, this.ground);
         }
         for(var i = 0; i < 3; i++){
             addBlockC((21*64)+(i*64), 390, this.ground);
@@ -67,16 +71,24 @@ class City extends Phaser.Scene{
         addBlockC((16*64)+32, 600 -(6*64)-32, this.ground);
         addBlockC(736, 632, this.ground);
         addBlockC(736, 696, this.ground);
+        this.help = addBlockC(752, 232, this.ground);
+        this.help.setVisible(false);
         this.physics.add.collider(this.boots, this.ground);
         this.physics.add.collider(this.house, this.ground);
+        this.physics.add.collider(this.gate, this.ground);
         this.physics.add.overlap(this.house, this.boots, this.main, null, this);
+        this.physics.add.overlap(this.gate, this.boots, this.unlock, null, this);
     }
 
     update() {
         if(!this.gameOver){
             this.playerMovementManager();
         }
-        
+        if(this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 32){
+            this.key.destroy();
+            this.help.destroy();
+            this.hasKey = true;
+        }
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
         
@@ -121,6 +133,13 @@ class City extends Phaser.Scene{
             x = this.boots.x;
             y = this.boots.y;
             this.scene.start('Building');
+        }
+    }
+    unlock(){
+        if(this.hasKey){
+            this.gate.destroy();
+        }else{
+            this.boots.setVelocityX(0);
         }
     }
 }

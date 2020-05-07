@@ -20,7 +20,7 @@ class Forest extends Phaser.Scene{
             this.forest.setScale(1/2);
         }
         this.house = this.physics.add.sprite(500, 356, 'fhouse');
-        this.physics.world.setBounds(0, -200, 1690, 800);
+        this.physics.world.setBounds(0, -200, 1090, 800);
         this.cameras.main.setBounds(0, 0, 1600, 600);
         this.boots = this.physics.add.sprite(x, y, 'boots');
         this.boots.setScale(1/2);
@@ -76,7 +76,7 @@ class Forest extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-600);
         }
-        if(this.boots.x >= 1640){
+        if(this.boots.x >= 1040){
             x = 100;
             y = 400;
             this.scene.start('Overworld');

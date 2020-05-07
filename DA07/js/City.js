@@ -21,8 +21,10 @@ class City extends Phaser.Scene{
             this.city.setScale(1/2);
         }
         this.hasKey = false;
+        this.hasPick = false;
         this.key = this.add.image(672, 32, 'key');
-        this.gate = this.physics.add.image(768, 232, 'gate');
+        this.gate = this.add.image(768, 232, 'gate');
+        this.pick = this.add.image(672, 216, 'pick');
         this.house = this.physics.add.sprite(200, 361, 'chouse');
         this.physics.world.setBounds(0, -200, 1690, 800);
         this.cameras.main.setBounds(0, 0, 1600, 700);
@@ -75,7 +77,6 @@ class City extends Phaser.Scene{
         this.help.setVisible(false);
         this.physics.add.collider(this.boots, this.ground);
         this.physics.add.collider(this.house, this.ground);
-        this.physics.add.collider(this.gate, this.ground);
         this.physics.add.overlap(this.house, this.boots, this.main, null, this);
         this.physics.add.overlap(this.gate, this.boots, this.unlock, null, this);
     }
@@ -88,6 +89,10 @@ class City extends Phaser.Scene{
             this.key.destroy();
             this.help.destroy();
             this.hasKey = true;
+        }
+        if(this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 216){
+            this.pick.destroy();
+            this.hasPick = true;
         }
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!

@@ -13,6 +13,8 @@ class Building extends Phaser.Scene{
         //this.add.text(50, 400, "Enter house to go\nback to Main Menu", { font: '24px Arial', fill: '#000000' });
         this.tent = this.add.image(400, 300, 'hin');
         this.man = this.physics.add.image(500, 350, 'lumber');
+        this.man.setScale(1/2);
+        this.man.body.setAllowGravity(false);
         this.ground = this.physics.add.staticGroup();
         this.physics.world.setBounds(0, 0, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);

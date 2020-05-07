@@ -1,5 +1,9 @@
 "use strict";
 
+var hasCup = false;
+var hasKey2 = false;
+var hasPromition = false;
+
 class Flower extends Phaser.Scene{
 
     constructor(){
@@ -10,6 +14,8 @@ class Flower extends Phaser.Scene{
         //this.add.text(50, 100, "Congrats you have made it through the city and forest\nCome back next week for a content update", { font: '24px Arial', fill: '#000000' });
         //this.add.text(50, 400, "Enter house to go\nback to Main Menu", { font: '24px Arial', fill: '#000000' });
         this.tent = this.add.image(400, 300, 'fin');
+        this.plant = this.physics.add.image(300, 400, 'plant');
+        this.plant.body.setAllowGravity(false);
         this.ground = this.physics.add.staticGroup();
         this.physics.world.setBounds(0, 0, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);

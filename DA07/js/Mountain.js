@@ -20,10 +20,9 @@ class Mountain extends Phaser.Scene{
             this.forest.setScale(1/2);
         }
         this.house = this.physics.add.sprite(500, 374, 'mhouse');
-        this.house.setScale(1/2);
         this.physics.world.setBounds(0, -200, 1690, 800);
         this.cameras.main.setBounds(0, 0, 1600, 600);
-        this.boots = this.physics.add.sprite(100, 400, 'boots');
+        this.boots = this.physics.add.sprite(x, y, 'boots');
         this.boots.setScale(1/2);
         this.boots.setCollideWorldBounds(true);
         this.facing = "right";
@@ -33,12 +32,6 @@ class Mountain extends Phaser.Scene{
             this.layer = this.ground.create(32+(i*64), 568, 'grass');
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
-        }
-        addBlock(0, 550, this.ground);
-        addBlock(200, 400, this.ground);
-        addBlock(0, 250, this.ground);
-        for(var i = 1; i < 8; i++){
-            addBlock(300, 568-(i*64), this.ground);
         }
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -78,6 +71,7 @@ class Mountain extends Phaser.Scene{
             this.boots.anims.play("boot_walk", true);
         }else{
             this.boots.setVelocityX(0);
+            this.boots.anims.play("boot_side", true);
         }
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-600);

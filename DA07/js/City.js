@@ -1,6 +1,6 @@
 "use strict";
-function addBlock(x, y, ground){
-    game.layer = ground.create(x, y, 'grass');
+function addBlockC(x, y, ground){
+    game.layer = ground.create(x, y, 'brick');
     game.layer.setSize(64, 64);
     game.layer.setScale(2);
 }
@@ -19,23 +19,54 @@ class City extends Phaser.Scene{
             this.city = this.BG1.create(200+(i*400), 300, 'cityBG');
             this.city.setScale(1/2);
         }
-        this.house = this.physics.add.sprite(200, 360, 'chouse');
-        this.physics.world.setBounds(0, 0, 1690, 600);
-        this.cameras.main.setBounds(0, 0, 1600, 600);
+        this.house = this.physics.add.sprite(200, 361, 'chouse');
+        this.physics.world.setBounds(0, -200, 1690, 800);
+        this.cameras.main.setBounds(0, 0, 1600, 700);
         this.boots = this.physics.add.sprite(x, y, 'boots');
-        this.boots.setScale(1/2);
-        this.boots.setCollideWorldBounds(true);
+        this.boots.setScale(1/3);
         this.facing = "right";
         this.gameOver = false;
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
+        this.cameras.main.startFollow(this.boots, true, 1.00, 1.00, 100, 200);
         this.ground = this.physics.add.staticGroup();
-        for(var i = 0; i < 1728/64; i++){
+        for(var i = 0; i < 7; i++){
             this.layer = this.ground.create(32+(i*64), 568, 'brick');
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
         }
+        for(var i = 0; i < 3; i++){
+            addBlockC(640+(i*64), 344, this.ground);
+        }
+        for(var i = 0; i < 4; i++){
+            addBlockC(640+(i*64), 116, this.ground);
+        }
+        for(var i = 0; i < 3; i++){
+            addBlockC((21*64)+(i*64), 390, this.ground);
+        }
+        for(var i = 0; i < 2; i++){
+            addBlockC(512+32+(i*64), 568, this.ground);
+        }
+        for(var i = 0; i < 24; i++){
+            addBlockC(704+32+(i*64), 568, this.ground);
+        }
+        for(var i = 0; i < 10; i++){
+            addBlockC((9*64), 504-(i*64), this.ground);
+        }
+        for(var i = 0; i < 7; i++){
+            addBlockC((24*64), 504-(i*64), this.ground);
+        }
+        for(var i = 0; i < 4; i++){
+            addBlockC(480+(i*64), 790, this.ground);
+        }
+        addBlockC((24*64)+1, 504-(7*64), this.ground);
+        addBlockC((20*64)+32, 600-(6*64)-32, this.ground);
+        addBlockC((23*64)+32, 600-(5*64), this.ground);
+        addBlockC((13*64)+32, 344, this.ground);
+        addBlockC((16*64)+32, 504, this.ground);
+        addBlockC((16*64)+32, 600 -(6*64)-32, this.ground);
+        addBlockC(736, 632, this.ground);
+        addBlockC(736, 696, this.ground);
         this.physics.add.collider(this.boots, this.ground);
         this.physics.add.collider(this.house, this.ground);
         this.physics.add.overlap(this.house, this.boots, this.main, null, this);
@@ -69,15 +100,19 @@ class City extends Phaser.Scene{
             this.boots.setVelocityX(400);
             this.boots.flipX = false;
             this.boots.anims.play("boot_walk", true);
+            if(this.boots.x > 675 && this.boots.x < 676 && this.boots.y > 470){
+                this.boots.setVelocityY(-100);
+            }
         }else{
             this.boots.setVelocityX(0);
+            this.boots.anims.play("boot_side", true);
         }
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-500);
         }
         if(this.boots.x >= 1640){
-            x = 400;
-            y = 100;
+            x = 100;
+            y = 400;
             this.scene.start('Overworld');
         }
     }

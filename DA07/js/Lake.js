@@ -1,6 +1,6 @@
 "use strict";
 function addBlock(x, y, ground){
-    game.layer = ground.create(x, y, 'grass');
+    game.layer = ground.create(x, y, 'sand');
     game.layer.setSize(64, 64);
     game.layer.setScale(2);
 }
@@ -18,7 +18,7 @@ class Lake extends Phaser.Scene{
             this.lake = this.BG.create(200+(i*400), 300, 'lakeBG');
             this.lake.setScale(1/2);
         }
-        this.house = this.physics.add.sprite(600, 360, 'lhouse');
+        this.house = this.physics.add.sprite(600, 390, 'lhouse');
         this.physics.world.setBounds(0, 0, 1690, 600);
         this.cameras.main.setBounds(0, 0, 1600, 600);
         this.boots = this.physics.add.sprite(x, y, 'boots');
@@ -70,6 +70,7 @@ class Lake extends Phaser.Scene{
             this.boots.anims.play("boot_walk", true);
         }else{
             this.boots.setVelocityX(0);
+            this.boots.anims.play("boot_side", true);
         }
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-600);

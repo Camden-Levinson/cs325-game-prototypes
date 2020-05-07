@@ -33,12 +33,6 @@ class Forest extends Phaser.Scene{
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
         }
-        addBlock(0, 550, this.ground);
-        addBlock(200, 400, this.ground);
-        addBlock(0, 250, this.ground);
-        for(var i = 1; i < 8; i++){
-            addBlock(300, 568-(i*64), this.ground);
-        }
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
@@ -77,6 +71,7 @@ class Forest extends Phaser.Scene{
             this.boots.anims.play("boot_walk", true);
         }else{
             this.boots.setVelocityX(0);
+            this.boots.anims.play("boot_side", true);
         }
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-600);

@@ -19,11 +19,12 @@ class Forest extends Phaser.Scene{
             this.forest = this.BG2.create(200+(i*400), 300, 'forestBG');
             this.forest.setScale(1/2);
         }
-        this.house = this.physics.add.sprite(500, 356, 'fhouse');
-        this.physics.world.setBounds(0, -200, 1090, 800);
-        this.cameras.main.setBounds(0, 0, 1600, 600);
+        this.house = this.physics.add.sprite(800, 356, 'fhouse');
+        this.tree = this.add.image(300, 395, 'tree');
+        this.physics.world.setBounds(-100, -200, 1190, 800);
+        this.cameras.main.setBounds(0, 0, 1000, 600);
         this.boots = this.physics.add.sprite(x, y, 'boots');
-        this.boots.setScale(1/2);
+        this.boots.setScale(1/3);
         this.boots.setCollideWorldBounds(true);
         this.facing = "right";
         this.gameOver = false;
@@ -76,7 +77,7 @@ class Forest extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-600);
         }
-        if(this.boots.x >= 1040){
+        if(this.boots.x >= 1040 || this.boots.x < -40){
             x = 100;
             y = 400;
             this.scene.start('Overworld');

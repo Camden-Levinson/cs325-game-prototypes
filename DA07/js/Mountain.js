@@ -20,10 +20,12 @@ class Mountain extends Phaser.Scene{
             this.forest.setScale(1/2);
         }
         this.house = this.physics.add.sprite(700, 374, 'mhouse');
-        this.physics.world.setBounds(0, -200, 1690, 800);
-        this.cameras.main.setBounds(0, 0, 1000, 600);
+        this.rock = this.add.image(100, 512, 'rock');
+        this.rock.setScale(2);
+        this.physics.world.setBounds(-100, -200, 1090, 800);
+        this.cameras.main.setBounds(0, 0, 900, 600);
         this.boots = this.physics.add.sprite(x, y, 'boots');
-        this.boots.setScale(1/2);
+        this.boots.setScale(1/3);
         this.boots.setCollideWorldBounds(true);
         this.facing = "right";
         this.gameOver = false;
@@ -76,7 +78,7 @@ class Mountain extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-600);
         }
-        if( this.boots.x >= 1040){
+        if( this.boots.x >= 940 || this.boots.x < -40){
             x = 100;
             y = 400;
             this.scene.start('Overworld');

@@ -19,10 +19,10 @@ class Lake extends Phaser.Scene{
             this.lake.setScale(1/2);
         }
         this.house = this.physics.add.sprite(600, 390, 'lhouse');
-        this.physics.world.setBounds(0, 0, 1690, 600);
-        this.cameras.main.setBounds(0, 0, 1600, 600);
+        this.physics.world.setBounds(-100, 0, 1090, 600);
+        this.cameras.main.setBounds(0, 0, 900, 600);
         this.boots = this.physics.add.sprite(x, y, 'boots');
-        this.boots.setScale(1/2);
+        this.boots.setScale(1/3);
         this.boots.setCollideWorldBounds(true);
         this.facing = "right";
         this.gameOver = false;
@@ -75,7 +75,7 @@ class Lake extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-600);
         }
-        if(this.boots.x >= 1640){
+        if(this.boots.x >= 940 || this.boots.x < -40){
             x = 100;
             y = 400;
             this.scene.start('Overworld');

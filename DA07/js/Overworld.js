@@ -13,6 +13,14 @@ class Overworld extends Phaser.Scene{
         this.char.setScale(4);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.physics.world.setBounds(0, 0, 800, 600);
+        this.lock1 = this.physics.add.sprite(107, 268, 'lock');
+        this.lock2 = this.physics.add.sprite(134, 268, 'lock');
+        this.lock3 = this.physics.add.sprite(161, 268, 'lock');
+        this.lock4 = this.physics.add.sprite(188, 268, 'lock');
+        this.lock1.body.setAllowGravity(false);
+        this.lock2.body.setAllowGravity(false);
+        this.lock3.body.setAllowGravity(false);
+        this.lock4.body.setAllowGravity(false);
     }
     update() {
         if(!this.gameOver){
@@ -30,7 +38,7 @@ class Overworld extends Phaser.Scene{
         if((this.char.x >= 407 && this.char.x <= 466) && (this.char.y >= 157 && this.char.y <= 218)){
             this.scene.start('Mountain');
         }
-        if((this.char.x >= 53 && this.char.x <= 117) && (this.char.y >= 13 && this.char.y <= 109)){
+        if(((this.char.x >= 53 && this.char.x <= 117) && (this.char.y >= 13 && this.char.y <= 109)) && hasKey){
             this.scene.start('End');
         }
         

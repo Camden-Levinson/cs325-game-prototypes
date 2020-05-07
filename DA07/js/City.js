@@ -7,6 +7,8 @@ function addBlockC(x, y, ground){
 }
 var x = 100;
 var y = 400;
+var hasKey = false;
+var hasPick = false;
 
 class City extends Phaser.Scene{
 
@@ -20,13 +22,12 @@ class City extends Phaser.Scene{
             this.city = this.BG1.create(200+(i*400), 300, 'cityBG');
             this.city.setScale(1/2);
         }
-        this.hasKey = false;
-        this.hasPick = false;
         this.key = this.add.image(672, 32, 'key');
-        this.gate = this.add.image(768, 232, 'gate');
-        this.pick = this.add.image(672, 216, 'pick');
+        this.gate = this.physics.add.image(768, 232, 'gate');
+        this.pick = this.add.image(672, 220, 'pick');
+        this.pick.setScale(2);
         this.house = this.physics.add.sprite(200, 361, 'chouse');
-        this.physics.world.setBounds(0, -200, 1690, 800);
+        this.physics.world.setBounds(-100, -200, 1790, 800);
         this.cameras.main.setBounds(0, 0, 1600, 700);
         this.boots = this.physics.add.sprite(x, y, 'boots');
         this.boots.setScale(1/3);
@@ -77,6 +78,7 @@ class City extends Phaser.Scene{
         this.help.setVisible(false);
         this.physics.add.collider(this.boots, this.ground);
         this.physics.add.collider(this.house, this.ground);
+        this.physics.add.collider(this.gate, this.ground);
         this.physics.add.overlap(this.house, this.boots, this.main, null, this);
         this.physics.add.overlap(this.gate, this.boots, this.unlock, null, this);
     }
@@ -85,14 +87,16 @@ class City extends Phaser.Scene{
         if(!this.gameOver){
             this.playerMovementManager();
         }
-        if(this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 32){
+        if((this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 32) || hasKey){
             this.key.destroy();
             this.help.destroy();
-            this.hasKey = true;
+            hasKey = true;
         }
-        if(this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 216){
+        if((this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 250 && this.boots.y > 210) || hasPick){
             this.pick.destroy();
-            this.hasPick = true;
+            hasPick = true;
+            addBlockC((7*64)+32, 568, this.ground);
+            addBlockC(672, 568, this.ground);
         }
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
@@ -127,7 +131,7 @@ class City extends Phaser.Scene{
         if(this.cursorKeys.up.isDown && this.boots.body.touching.down){
             this.boots.setVelocityY(-500);
         }
-        if(this.boots.x >= 1640){
+        if(this.boots.x >= 1640 || this.boots.x < -40){
             x = 100;
             y = 400;
             this.scene.start('Overworld');
@@ -141,10 +145,8 @@ class City extends Phaser.Scene{
         }
     }
     unlock(){
-        if(this.hasKey){
+        if(hasKey){
             this.gate.destroy();
-        }else{
-            this.boots.setVelocityX(0);
         }
     }
 }

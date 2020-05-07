@@ -13,9 +13,9 @@ class Tent extends Phaser.Scene{
         this.ground = this.physics.add.staticGroup();
         this.physics.world.setBounds(0, 0, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);
-        this.boots = this.physics.add.sprite(100, 400, 'boots');
+        this.boots = this.physics.add.sprite(400, 530, 'boots');
         this.boots.body.setAllowGravity(false);
-        this.boots.setScale(1/2);
+        this.boots.setScale(1/3);
         this.boots.setCollideWorldBounds(true);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);

@@ -5,8 +5,10 @@ function addBlock(x, y, ground){
     game.layer.setScale(2);
 }
 var x = 100;
-var y = 400;
+var y = 400
 
+var hasIron = false;
+var hasGold = false;
 class Mountain extends Phaser.Scene{
 
     constructor(){
@@ -20,7 +22,7 @@ class Mountain extends Phaser.Scene{
             this.forest.setScale(1/2);
         }
         this.house = this.physics.add.sprite(700, 374, 'mhouse');
-        this.rock = this.add.image(100, 512, 'rock');
+        this.rock = this.physics.add.image(100, 512, 'rock');
         this.rock.setScale(2);
         this.physics.world.setBounds(-100, -200, 1090, 800);
         this.cameras.main.setBounds(0, 0, 900, 600);
@@ -40,6 +42,7 @@ class Mountain extends Phaser.Scene{
         this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
         this.physics.add.collider(this.boots, this.ground);
         this.physics.add.collider(this.house, this.ground);
+        this.physics.add.collider(this.rock, this.ground);
         this.physics.add.overlap(this.house, this.boots, this.main, null, this);
     }
 

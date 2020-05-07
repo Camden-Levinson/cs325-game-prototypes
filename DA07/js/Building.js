@@ -1,6 +1,7 @@
 "use strict";
 
 var hasAxe = false;
+var hasAccess = false;
 
 class Building extends Phaser.Scene{
 
@@ -29,8 +30,8 @@ class Building extends Phaser.Scene{
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
         this.physics.add.collider(this.boots, this.ground);
-        this.physics.add.collider(this.house, this.ground);
-        this.physics.add.overlap(this.boots, this.house, this.main, null, this);*/
+        this.physics.add.collider(this.house, this.ground);*/
+        this.physics.add.overlap(this.boots, this.man, this.main, null, this);
     }
 
     update() {
@@ -92,8 +93,10 @@ class Building extends Phaser.Scene{
         }
     }
     main(){
-        if(this.interactKey.isDown){
-           this.scene.start('MainMenu'); 
+        if(this.interactKey.isDown && hasPick){
+           hasAxe = true; 
+        }else{
+            hasAccess = true;
         }
         
     }

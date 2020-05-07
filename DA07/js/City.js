@@ -76,6 +76,7 @@ class City extends Phaser.Scene{
         addBlockC(736, 696, this.ground);
         this.help = addBlockC(752, 232, this.ground);
         this.help.setVisible(false);
+        this.blockade = addBlockC((7*64)+32, 568, this.ground);
         this.physics.add.collider(this.boots, this.ground);
         this.physics.add.collider(this.house, this.ground);
         this.physics.add.collider(this.gate, this.ground);
@@ -97,6 +98,9 @@ class City extends Phaser.Scene{
             hasPick = true;
             addBlockC((7*64)+32, 568, this.ground);
             addBlockC(672, 568, this.ground);
+        }
+        if(hasAccess){
+            this.blockade.destroy();
         }
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!

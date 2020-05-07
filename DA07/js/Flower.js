@@ -16,6 +16,7 @@ class Flower extends Phaser.Scene{
         this.tent = this.add.image(400, 300, 'fin');
         this.plant = this.physics.add.image(300, 400, 'plant');
         this.plant.body.setAllowGravity(false);
+        this.plant.setScale(1/4);
         this.ground = this.physics.add.staticGroup();
         this.physics.world.setBounds(0, 0, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);
@@ -30,8 +31,8 @@ class Flower extends Phaser.Scene{
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
         this.physics.add.collider(this.boots, this.ground);
-        this.physics.add.collider(this.house, this.ground);
-        this.physics.add.overlap(this.boots, this.house, this.main, null, this);*/
+        this.physics.add.collider(this.house, this.ground);*/
+        this.physics.add.overlap(this.boots, this.plant, this.main, null, this);
     }
 
     update() {
@@ -90,6 +91,11 @@ class Flower extends Phaser.Scene{
             this.boots.y -= 5;
         }else{
             this.boots.anims.play("boot_side", true);
+        }
+    }
+    main(){
+        if(this.interactKey.isDown){
+            hasCup = true;
         }
     }
 }

@@ -1,5 +1,8 @@
 "use strict";
 
+var hasKey3 = false;
+var hasBlanket = false;
+
 class Tent extends Phaser.Scene{
 
     constructor(){
@@ -11,6 +14,9 @@ class Tent extends Phaser.Scene{
         //this.add.text(50, 400, "Enter house to go\nback to Main Menu", { font: '24px Arial', fill: '#000000' });
         this.tent = this.add.image(400, 300, 'tin');
         this.ground = this.physics.add.staticGroup();
+        this.nook = this.physics.add.image(320, 380, 'nook');
+        this.nook.body.setAllowGravity(false);
+        this.nook.setScale(1/2);
         this.physics.world.setBounds(0, 0, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(400, 530, 'boots');

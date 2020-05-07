@@ -1,5 +1,9 @@
 "use strict";
 
+var hasWater = false;
+var hasKey4 = false;
+var hasStone = false;
+
 class Cave extends Phaser.Scene{
 
     constructor(){
@@ -11,6 +15,8 @@ class Cave extends Phaser.Scene{
         //this.add.text(50, 400, "Enter house to go\nback to Main Menu", { font: '24px Arial', fill: '#000000' });
         this.tent = this.add.image(400, 300, 'cin');
         this.ground = this.physics.add.staticGroup();
+        this.smith = this.physics.add.image(700, 500, 'smith');
+        this.smith.body.setAllowGravity(false);
         this.physics.world.setBounds(0, 0, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(475, 530, 'boots');

@@ -6,6 +6,8 @@ function addBlock(x, y, ground){
 }
 var x = 100;
 var y = 400;
+var hasWood = false;
+var hasFlower = false;
 class Forest extends Phaser.Scene{
 
     constructor(){
@@ -20,7 +22,7 @@ class Forest extends Phaser.Scene{
             this.forest.setScale(1/2);
         }
         this.house = this.physics.add.sprite(800, 356, 'fhouse');
-        this.tree = this.add.image(300, 395, 'tree');
+        this.tree = this.physics.add.image(300, 395, 'tree');
         this.physics.world.setBounds(-100, -200, 1190, 800);
         this.cameras.main.setBounds(0, 0, 1000, 600);
         this.boots = this.physics.add.sprite(x, y, 'boots');
@@ -39,6 +41,7 @@ class Forest extends Phaser.Scene{
         this.cameras.main.startFollow(this.boots, true, 1.00, 1.00);
         this.physics.add.collider(this.boots, this.ground);
         this.physics.add.collider(this.house, this.ground);
+        this.physics.add.collider(this.tree, this.ground);
         this.physics.add.overlap(this.house, this.boots, this.main, null, this);
     }
 

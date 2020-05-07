@@ -11,13 +11,13 @@ class Flower extends Phaser.Scene{
     }
 
     create() {
-        //this.add.text(50, 100, "Congrats you have made it through the city and forest\nCome back next week for a content update", { font: '24px Arial', fill: '#000000' });
         //this.add.text(50, 400, "Enter house to go\nback to Main Menu", { font: '24px Arial', fill: '#000000' });
         this.tent = this.add.image(400, 300, 'fin');
         this.plant = this.physics.add.image(300, 400, 'plant');
         this.plant.body.setAllowGravity(false);
         this.plant.setScale(1/4);
         this.ground = this.physics.add.staticGroup();
+        this.key = this.add.image(465, 125, 'key');
         this.physics.world.setBounds(0, 0, 800, 800);
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.boots = this.physics.add.sprite(400, 490, 'boots');
@@ -97,9 +97,14 @@ class Flower extends Phaser.Scene{
         if(this.interactKey.isDown){
             if(hasWater){
                 hasKey2 = true;
-            }else if(hasTask){
+                hasCup = false;
+                this.key.destroy();
+            }
+            if(hasTask && hasKey2){
                 hasPromition = true;
-            }else{
+                this.add.text(0, 0, "Got Promition to cut tree", { font: '24px Arial', fill: '#FFFFFF' });
+            }else if(!hasWater){
+                this.add.text(0, 0, "Need Water", { font: '24px Arial', fill: '#FFFFFF' });
                 hasCup = true;
             }
         }

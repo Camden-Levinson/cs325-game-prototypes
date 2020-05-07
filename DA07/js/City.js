@@ -91,13 +91,14 @@ class City extends Phaser.Scene{
         if((this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 32) || hasKey1){
             this.key.destroy();
             this.help.destroy();
-            hasKey = true;
+            hasKey1 = true;
         }
         if((this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 250 && this.boots.y > 210) || hasPick){
             this.pick.destroy();
             hasPick = true;
             addBlockC((7*64)+32, 568, this.ground);
             addBlockC(672, 568, this.ground);
+            this.add.text(640, 0, "Need to return this ASAP", { font: '24px Arial', fill: '#000000' });
         }
         if(hasAccess){
             this.blockade.destroy();

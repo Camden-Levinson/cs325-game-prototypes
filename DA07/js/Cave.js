@@ -94,15 +94,23 @@ class Cave extends Phaser.Scene{
     }
     main(){
         if(this.interactKey.isDown){
-           if(hasBlanket){
-            hasWater = true;
-           }
-           if(hasIron){
-            hasStone = true;
-           }
-           if(hasGold && hasStone){
-            hasKey4 = true;
-           }
+            if(hasCup && !hasBlanket){
+                this.add.text(0, 0, "Need Blanket", { font: '24px Arial', fill: '#FFFFFF' });
+            }
+            if(hasBlanket && hasCup){
+                hasWater = true;
+                this.add.text(0, 0, "Got Water", { font: '24px Arial', fill: '#FFFFFF' });
+            }
+            if(hasIron){
+                hasStone = true;
+                this.add.text(0, 0, "Got Stone", { font: '24px Arial', fill: '#FFFFFF' });
+            }else if(!hasCup){
+                this.add.text(0, 0, "Need Iron", { font: '24px Arial', fill: '#FFFFFF' });
+            }
+            if(hasGold && hasStone){
+                hasKey4 = true;
+                this.add.text(0, 0, "\nGot Key", { font: '24px Arial', fill: '#FFFFFF' });
+            }
         }
         
     }

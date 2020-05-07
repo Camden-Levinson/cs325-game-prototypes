@@ -99,9 +99,10 @@ class Forest extends Phaser.Scene{
     }
     chop(){
         if(this.interactKey.isDown){
-            if(hasAxe){
+            if(hasAxe && hasPromition){
                 hasWood = true;
                 hasFlower = true;
+                this.add.text(0, 0, "Got Wood and Flower", { font: '24px Arial', fill: '#000000' });
                 this.tree.destroy();
             }
         }

@@ -97,12 +97,15 @@ class Tent extends Phaser.Scene{
         if(this.interactKey.isDown){
             if(hasCup){
                 hasBlanket = true;
+                this.add.text(0, 0, "Got Blanket", { font: '24px Arial', fill: '#FFFFFF' });
             }
-            if(!hasTask){
+            if(!hasTask && !hasCup && returnPick && hasKey2){
                 hasTask = true;
+                this.add.text(0, 0, "Need Wood, Iron, and Stone", { font: '24px Arial', fill: '#FFFFFF' });
             }
             if(hasStone && hasWood && hasIron){
                 hasKey3 = true;
+                this.add.text(0, 0, "Got Key", { font: '24px Arial', fill: '#FFFFFF' });
             }
         }
     }

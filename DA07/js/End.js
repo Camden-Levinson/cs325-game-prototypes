@@ -7,7 +7,7 @@ class End extends Phaser.Scene{
     }
 
     create() {
-        this.add.text(50, 100, "Congrats you have made it through the city and forest\nCome back next week for a content update", { font: '24px Arial', fill: '#000000' });
+        this.add.text(50, 100, "Congrats you beat my Game", { font: '24px Arial', fill: '#000000' });
         this.add.text(50, 400, "Enter house to go\nback to Main Menu", { font: '24px Arial', fill: '#000000' });
         this.house = this.physics.add.image(600, 330, 'house');
         this.ground = this.physics.add.staticGroup();

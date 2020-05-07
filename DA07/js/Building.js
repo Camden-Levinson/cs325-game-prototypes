@@ -2,6 +2,7 @@
 
 var hasAxe = false;
 var hasAccess = false;
+var returnPick = false;
 
 class Building extends Phaser.Scene{
 
@@ -93,17 +94,24 @@ class Building extends Phaser.Scene{
         }
     }
     main(){
-        if(this.interactKey.isDown && hasPick){
-            hasPick = false;
-        }else{
-            hasAccess = true;
+        if(this.interactKey.isDown){
+            if(hasPick && !returnPick){
+                hasPick = false;
+                returnPick = true;
+                this.add.text(0, 0, "Returned Pickaxe", { font: '24px Arial', fill: '#000000' });
+            }else if(!hasAccess){
+                hasAccess = true;
+                this.add.text(0, 0, "You heard a sound", { font: '24px Arial', fill: '#000000' });
+            }
+            if(hasFlower){
+                hasPick = true;
+                hasFlower = false;
+                this.add.text(0, 0, "Got Pickaxe", { font: '24px Arial', fill: '#000000' });
+            }
+            if(hasTask && !hasAxe){
+                hasAxe = true;
+                this.add.text(0, 0, "Got Axe", { font: '24px Arial', fill: '#000000' });
+            }
         }
-        if(hasFlower){
-            hasPick = true;
-        }
-        if(hasTask){
-            hasAxe = true;
-        }
-        
     }
 }

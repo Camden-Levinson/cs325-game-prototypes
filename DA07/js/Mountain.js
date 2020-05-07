@@ -102,6 +102,7 @@ class Mountain extends Phaser.Scene{
             if(hasPick){
                 hasIron = true;
                 hasGold = true;
+                this.add.text(0, 0, "Got Iron and Gold", { font: '24px Arial', fill: '#000000' });
                 this.rock.destroy();
             }
         }

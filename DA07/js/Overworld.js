@@ -38,8 +38,20 @@ class Overworld extends Phaser.Scene{
         if((this.char.x >= 407 && this.char.x <= 466) && (this.char.y >= 157 && this.char.y <= 218)){
             this.scene.start('Mountain');
         }
-        if(((this.char.x >= 53 && this.char.x <= 117) && (this.char.y >= 13 && this.char.y <= 109)) && hasKey){
+        if(((this.char.x >= 0 && this.char.x <= 52) && (this.char.y >= 243 && this.char.y <= 290))){
             this.scene.start('End');
+        }
+        if(hasKey1){
+            this.lock1.destroy();
+        }
+        if(hasKey2){
+            this.lock2.destroy();
+        }
+        if(hasKey3){
+            this.lock3.destroy();
+        }
+        if(hasKey4){
+            this.lock4.destroy();
         }
         
 

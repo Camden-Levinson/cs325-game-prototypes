@@ -7,7 +7,7 @@ function addBlockC(x, y, ground){
 }
 var x = 100;
 var y = 400;
-var hasKey = false;
+var hasKey1 = false;
 var hasPick = false;
 
 class City extends Phaser.Scene{
@@ -87,7 +87,7 @@ class City extends Phaser.Scene{
         if(!this.gameOver){
             this.playerMovementManager();
         }
-        if((this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 32) || hasKey){
+        if((this.boots.x > 672 && this.boots.x < 736 && this.boots.y < 32) || hasKey1){
             this.key.destroy();
             this.help.destroy();
             hasKey = true;
@@ -145,7 +145,7 @@ class City extends Phaser.Scene{
         }
     }
     unlock(){
-        if(hasKey){
+        if(hasKey1){
             this.gate.destroy();
         }
     }

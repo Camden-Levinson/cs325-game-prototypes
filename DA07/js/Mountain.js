@@ -44,13 +44,16 @@ class Mountain extends Phaser.Scene{
         this.physics.add.collider(this.house, this.ground);
         this.physics.add.collider(this.rock, this.ground);
         this.physics.add.overlap(this.house, this.boots, this.main, null, this);
+        this.physics.add.overlap(this.rock, this.boots, this.mine, null, this);
     }
 
     update() {
         if(!this.gameOver){
             this.playerMovementManager();
         }
-        
+        if(hasIron){
+            this.rock.destroy();
+        }
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
         
@@ -92,6 +95,15 @@ class Mountain extends Phaser.Scene{
             x = this.boots.x;
             y = this.boots.y;
             this.scene.start('Cave');
+        }
+    }
+    mine(){
+        if(this.interactKey.isDown){
+            if(hasPick){
+                hasIron = true;
+                hasGold = true;
+                this.rock.destroy();
+            }
         }
     }
 }

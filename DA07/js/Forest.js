@@ -43,11 +43,15 @@ class Forest extends Phaser.Scene{
         this.physics.add.collider(this.house, this.ground);
         this.physics.add.collider(this.tree, this.ground);
         this.physics.add.overlap(this.house, this.boots, this.main, null, this);
+        this.physics.add.overlap(this.tree, this.boots, this.chop, null, this);
     }
 
     update() {
         if(!this.gameOver){
             this.playerMovementManager();
+        }
+        if(hasFlower){
+            this.tree.destroy();
         }
         
 
@@ -91,6 +95,15 @@ class Forest extends Phaser.Scene{
             x = this.boots.x;
             y = this.boots.y;
             this.scene.start('Flower');
+        }
+    }
+    chop(){
+        if(this.interactKey.isDown){
+            if(hasAxe){
+                hasWood = true;
+                hasFlower = true;
+                this.tree.destroy();
+            }
         }
     }
 }

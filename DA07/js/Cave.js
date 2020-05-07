@@ -30,8 +30,8 @@ class Cave extends Phaser.Scene{
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
         this.physics.add.collider(this.boots, this.ground);
-        this.physics.add.collider(this.house, this.ground);
-        this.physics.add.overlap(this.boots, this.house, this.main, null, this);*/
+        this.physics.add.collider(this.house, this.ground);*/
+        this.physics.add.overlap(this.boots, this.smith, this.main, null, this);
     }
 
     update() {
@@ -94,7 +94,15 @@ class Cave extends Phaser.Scene{
     }
     main(){
         if(this.interactKey.isDown){
-           this.scene.start('MainMenu'); 
+           if(hasBlanket){
+            hasWater = true;
+           }
+           if(hasIron){
+            hasStone = true;
+           }
+           if(hasGold && hasStone){
+            hasKey4 = true;
+           }
         }
         
     }

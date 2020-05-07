@@ -2,6 +2,7 @@
 
 var hasKey3 = false;
 var hasBlanket = false;
+var hasTask = false;
 
 class Tent extends Phaser.Scene{
 
@@ -30,8 +31,8 @@ class Tent extends Phaser.Scene{
             this.layer.setSize(64, 64);
             this.layer.setScale(2);
         this.physics.add.collider(this.boots, this.ground);
-        this.physics.add.collider(this.house, this.ground);
-        this.physics.add.overlap(this.boots, this.house, this.main, null, this);*/
+        this.physics.add.collider(this.house, this.ground);*/
+        this.physics.add.overlap(this.boots, this.nook, this.main, null, this);
     }
 
     update() {
@@ -90,6 +91,19 @@ class Tent extends Phaser.Scene{
             this.boots.y -= 5;
         }else{
             this.boots.anims.play("boot_side", true);
+        }
+    }
+    main(){
+        if(this.interactKey.isDown){
+            if(hasCup){
+                hasBlanket = true;
+            }
+            if(!hasTask){
+                hasTask = true;
+            }
+            if(hasStone && hasWood && hasIron){
+                hasKey3 = true;
+            }
         }
     }
 }

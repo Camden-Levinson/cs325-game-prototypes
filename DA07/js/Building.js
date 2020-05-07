@@ -94,9 +94,15 @@ class Building extends Phaser.Scene{
     }
     main(){
         if(this.interactKey.isDown && hasPick){
-           hasAxe = true; 
+            hasPick = false;
         }else{
             hasAccess = true;
+        }
+        if(hasFlower){
+            hasPick = true;
+        }
+        if(hasTask){
+            hasAxe = true;
         }
         
     }

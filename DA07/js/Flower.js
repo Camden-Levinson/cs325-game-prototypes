@@ -95,7 +95,13 @@ class Flower extends Phaser.Scene{
     }
     main(){
         if(this.interactKey.isDown){
-            hasCup = true;
+            if(hasWater){
+                hasKey2 = true;
+            }else if(hasTask){
+                hasPromition = true;
+            }else{
+                hasCup = true;
+            }
         }
     }
 }

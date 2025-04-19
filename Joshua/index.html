@@ -43,15 +43,14 @@
 
     <h1>SIBLINGS DAY PRESENT</h1>
     <button id="giftButton" onclick="openGift()">Open Gift</button>
-    <button class='hide-button' id="Glasses">Glasses</button>
-    <button class='hide-button' id="NoGlasses">No Glasses</button>
+    <button class='hide-button' id="Body">Body</button>
     <button class='hide-button' id="Done">Done</button>
-    <button class='hide-button' id="Accounting">Accounting</button>
-    <button class='hide-button' id="Avengers">Avengers</button>
-    <button class='hide-button' id="College">College</button>
-    <button class='hide-button' id="Frog">Frog</button>
-    <button class='hide-button' id="Knitting">Knitting</button>
-    <button class='hide-button' id="Supernatural">Supernatural</button>
+    <button class='hide-button' id="Atom">Atom</button>
+    <button class='hide-button' id="Book">Book</button>
+    <button class='hide-button' id="Duck">Duck</button>
+    <button class='hide-button' id="Game">Game</button>
+    <button class='hide-button' id="Lorcana">Lorcana</button>
+    <button class='hide-button' id="NCState">NCState</button>
     <button class='hide-button' id="Next">Next</button>
     <button class='hide-button' id="NoBorder">NoBorder</button>
     <button class='hide-button' id="Border">Border</button>
@@ -64,26 +63,24 @@
 
   <script>
     let state = {
-      Super: false,
-      Knit: false,
-      Froggy: false,
-      Coll: false,
-      Avenge: false,
-      Count: false
+      Atom: false,
+      Book: false,
+      Duck: false,
+      Game: false,
+      Lorcana: false,
+      NCState: false
     };
-    let Glasses = false
 
     // Element references
     const buttons = {
       Done: document.getElementById('Done'),
-      YesGlasses: document.getElementById('Glasses'),
-      NoGlasses: document.getElementById('NoGlasses'),
-      Accounting: document.getElementById('Accounting'),
-      Avengers: document.getElementById('Avengers'),
-      College: document.getElementById('College'),
-      Frog: document.getElementById('Frog'),
-      Knitting: document.getElementById('Knitting'),
-      Supernatural: document.getElementById('Supernatural'),
+      Body: document.getElementById('Body'),
+      Atom: document.getElementById('Atom'),
+      Book: document.getElementById('Book'),
+      Duck: document.getElementById('Duck'),
+      Game: document.getElementById('Game'),
+      Lorcana: document.getElementById('Lorcana'),
+      NCState: document.getElementById('NCState'),
       Next: document.getElementById('Next'),
       NoBorder: document.getElementById('NoBorder'),
       Border: document.getElementById('Border'),
@@ -94,10 +91,8 @@
     function openGift() {
         const giftButton = document.getElementById('giftButton');
         const imageFiles = [
-            'Accounting.png', 'Avengers.png', 'College.png', 'Frog.png', 'GlassesFullImage.png', 
-            'GlassesItems.png', 'GlassesNoBackground.png', 'GlassesNoBorder.png', 'GlassesOnly.png', 
-            'ItemsOnly.png', 'Knitting.png', 'NoGlassesFullImage.png', 'NoGlassesItems.png', 
-            'NoGlassesNoBackground.png', 'NoGlassesNoBorder.png', 'NoGlassesOnly.png', 'Supernatural.png'
+            'Atom.png', 'Body.png', 'Book.png', 'Duck.png', 'Game.png', 
+            'Lorcana.png', 'NCState.png'
         ];
 
         const imageList = document.getElementById('imageList');
@@ -113,8 +108,7 @@
         });
 
         giftButton.style.display = 'none';
-        buttons.YesGlasses.style.display = 'block'
-        buttons.NoGlasses.style.display = 'block'
+        buttons.Body.style.display = 'block'
     }
 
     // Utility function to toggle images
@@ -133,21 +127,14 @@
     }
 
     // Event listeners
-    buttons.YesGlasses.addEventListener('click', () => {
-        Glasses = true;
-        toggleImage(8);
-        buttons.Done.style.display = 'block';
-    });
-
-    buttons.NoGlasses.addEventListener('click', () => {
-        Glasses = false;
-        toggleImage(15);
+    buttons.Body.addEventListener('click', () => {
+        toggleImage(1);
         buttons.Done.style.display = 'block';
     });
 
     buttons.Done.addEventListener('click', () => {
         toggleButtonVisibility([
-            'Accounting', 'Avengers', 'College', 'Frog', 'Knitting', 'Supernatural', 'Next'
+            'Atom', 'Book', 'Duck', 'Game', 'Lorcana', 'NCState', 'End'
         ]);
         buttons.Done.style.display = 'none';
     });
@@ -162,12 +149,12 @@
         });
     }
 
-    toggleSectionImage(buttons.Accounting, 0, 'Count');
-    toggleSectionImage(buttons.Avengers, 1, 'Avenge');
-    toggleSectionImage(buttons.College, 2, 'Coll');
-    toggleSectionImage(buttons.Frog, 3, 'Froggy');
-    toggleSectionImage(buttons.Knitting, 10, 'Knit');
-    toggleSectionImage(buttons.Supernatural, 16, 'Super');
+    toggleSectionImage(buttons.Atom, 0, 'Atom');
+    toggleSectionImage(buttons.Book, 2, 'Book');
+    toggleSectionImage(buttons.Duck, 3, 'Duck');
+    toggleSectionImage(buttons.Game, 4, 'Game');
+    toggleSectionImage(buttons.Lorcana, 5, 'Lorcana');
+    toggleSectionImage(buttons.NCState, 6, 'NCState');
 
     // Next button logic
     buttons.Next.addEventListener('click', () => {
@@ -199,9 +186,14 @@
     });
 
     buttons.End.addEventListener('click', () => {
+      if (Object.values(state).every(val => val)){
         const images = document.querySelectorAll('#imageList img');
         images.forEach(img => img.style.display = 'none');
         document.write("Full Present on April 26th");
+      }else {
+        alert("Please make sure that all items have appeared");
+        toggleImage(1)
+      }
     });
   </script>
 </body>

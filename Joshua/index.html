@@ -92,6 +92,7 @@
         const giftButton = document.getElementById('giftButton');
         const imageFiles = [
             'Atom.png', 'Body.png', 'Book.png', 'Duck.png', 'Game.png', 
+            'JoshuaFullBack.png', 'JoshuaMidBack.png','JoshuaNoBack.png',
             'Lorcana.png', 'NCState.png'
         ];
 
@@ -134,7 +135,7 @@
 
     buttons.Done.addEventListener('click', () => {
         toggleButtonVisibility([
-            'Atom', 'Book', 'Duck', 'Game', 'Lorcana', 'NCState', 'End'
+            'Atom', 'Book', 'Duck', 'Game', 'Lorcana', 'NCState', 'Next'
         ]);
         buttons.Done.style.display = 'none';
     });
@@ -153,8 +154,8 @@
     toggleSectionImage(buttons.Book, 2, 'Book');
     toggleSectionImage(buttons.Duck, 3, 'Duck');
     toggleSectionImage(buttons.Game, 4, 'Game');
-    toggleSectionImage(buttons.Lorcana, 5, 'Lorcana');
-    toggleSectionImage(buttons.NCState, 6, 'NCState');
+    toggleSectionImage(buttons.Lorcana, 8, 'Lorcana');
+    toggleSectionImage(buttons.NCState, 9, 'NCState');
 
     // Next button logic
     buttons.Next.addEventListener('click', () => {
@@ -163,12 +164,10 @@
 
         if (Object.values(state).every(val => val)) {
             toggleButtonVisibility(['NoBorder', 'Border', 'End']);
-            if (Glasses) toggleImage(5);
-            else toggleImage(12);
+            toggleImage(7);
         } else {
             alert("Please make sure that all items have appeared");
-            if (Glasses) toggleImage(8);
-            else toggleImage(15);
+            toggleImage(1);
         }
     });
 
@@ -176,24 +175,19 @@
     buttons.NoBorder.addEventListener('click', () => {
         const images = document.querySelectorAll('#imageList img');
         images.forEach(img => img.style.display = 'none');
-        Glasses ? toggleImage(7) : toggleImage(14);
+        toggleImage(6);
     });
 
     buttons.Border.addEventListener('click', () => {
         const images = document.querySelectorAll('#imageList img');
         images.forEach(img => img.style.display = 'none');
-        Glasses ? toggleImage(4) : toggleImage(11);
+        toggleImage(5);
     });
 
     buttons.End.addEventListener('click', () => {
-      if (Object.values(state).every(val => val)){
-        const images = document.querySelectorAll('#imageList img');
-        images.forEach(img => img.style.display = 'none');
-        document.write("Full Present on April 26th");
-      }else {
-        alert("Please make sure that all items have appeared");
-        toggleImage(1)
-      }
+      const images = document.querySelectorAll('#imageList img');
+      images.forEach(img => img.style.display = 'none');
+      document.write("Full Present on April 26th");
     });
   </script>
 </body>

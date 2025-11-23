@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>German-English Dictionary</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background:#f7f7f7;
+        padding: 20px;
+    }
+    .box {
+        background:white;
+        width: 430px;
+        padding:20px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button, select {
+        width:100%;
+        padding:10px;
+        margin:5px 0;
+    }
+    button {
+        cursor:pointer;
+        background:#0078ff;
+        border:none;
+        color:white;
+    }
+    button:hover {
+        background:#005fcc;
+    }
+</style>
+</head>
+<body>
+
+<h1>German-English Dictionary</h1>
+
+<!-- LOAD FILE -->
+<div class="box">
+    <h2>Load Dictionary File</h2>
+    <input type="file" id="fileInput" accept=".txt">
+    <p>Format: <code>English - German</code> per line</p>
+</div>
+
+<!-- LOOKUP -->
+<div class="box">
+    <h2>Look Up a Word</h2>
+
+    <select id="lookupDirection">
+        <option value="engToGer">English → German</option>
+        <option value="gerToEng">German → English</option>
+    </select>
+
+    <input id="lookupInput" type="text" placeholder="Enter word">
+    <button onclick="lookUp()">Look Up</button>
+    <p id="lookupResult"></p>
+</div>
+
+<!-- ADD ENTRY -->
+<div class="box">
+    <h2>Add a New Entry</h2>
+
+    <select id="addDirection">
+        <option value="engToGer">English → German</option>
+        <option value="gerToEng">German → English</option>
+    </select>
+
+    <input id="addInput1" type="text" placeholder="Word 1">
+    <input id="addInput2" type="text" placeholder="Word 2">
+    <button onclick="addEntry()">Add Entry</button>
+    <p id="addResult"></p>
+</div>
+
+<!-- REMOVE ENTRY -->
+<div class="box">
+    <h2>Remove an Entry</h2>
+    <select id="removeDirection">
+        <option value="eng">Remove by English</option>
+        <option value="ger">Remove by German</option>
+    </select>
+
+    <input id="removeInput" type="text" placeholder="Word to remove">
+    <button onclick="removeEntry()">Remove Entry</button>
+    <p id="removeResult"></p>
+</div>
+
+<!-- DOWNLOAD -->
+<div class="box">
+    <h2>Download Dictionary</h2>
+    <button onclick="downloadFile()">Download Updated File</button>
+</div>
+
+<script>
+let dictionary = {};        // English → German
+let reverseDict = {};       // German → English
+let loadedFilename = "dictionary.txt";
+
+// ------------------------------------------------------
+// Load localStorage on startup
+// ------------------------------------------------------
+window.onload = function() {
+    const saved = localStorage.getItem("dictionaryData");
+    if (saved) {
+        dictionary = JSON.parse(saved);
+        rebuildReverseDict();
+    }
+};
+
+// ------------------------------------------------------
+// Save to localStorage
+// ------------------------------------------------------
+function saveToLocalStorage() {
+    localStorage.setItem("dictionaryData", JSON.stringify(dictionary));
+}
+
+// ------------------------------------------------------
+// Build German → English map
+// ------------------------------------------------------
+function rebuildReverseDict() {
+    reverseDict = {};
+    for (const eng in dictionary) {
+        const ger = dictionary[eng];
+        reverseDict[ger.toLowerCase()] = eng;
+    }
+}
+
+// ------------------------------------------------------
+// Load file
+// ------------------------------------------------------
+document.getElementById("fileInput").addEventListener("change", function() {
+    const file = this.files[0];
+    if (!file) return;
+
+    loadedFilename = file.name;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        dictionary = {};
+        const lines = e.target.result.split("\n");
+
+        lines.forEach(line => {
+            if (line.includes("-")) {
+                const parts = line.split("-");
+                const english = parts[0].trim().toLowerCase();
+                const german = parts[1].trim();
+                dictionary[english] = german;
+            }
+        });
+
+        rebuildReverseDict();
+        saveToLocalStorage();
+        alert("Dictionary loaded and saved!");
+    };
+    reader.readAsText(file);
+});
+
+// ------------------------------------------------------
+// Lookup function (Two-way)
+// ------------------------------------------------------
+function lookUp() {
+    const direction = document.getElementById("lookupDirection").value;
+    const word = document.getElementById("lookupInput").value.trim().toLowerCase();
+    const result = document.getElementById("lookupResult");
+
+    if (direction === "engToGer") {
+        if (dictionary[word]) {
+            result.textContent = `${word} → ${dictionary[word]}`;
+            result.style.color = "green";
+        } else {
+            result.textContent = "Word not found.";
+            result.style.color = "red";
+        }
+    } else {
+        if (reverseDict[word]) {
+            result.textContent = `${word} → ${reverseDict[word]}`;
+            result.style.color = "green";
+        } else {
+            result.textContent = "Word not found.";
+            result.style.color = "red";
+        }
+    }
+}
+
+// ------------------------------------------------------
+// Add entry (Two-way)
+// ------------------------------------------------------
+function addEntry() {
+    const direction = document.getElementById("addDirection").value;
+    const word1 = document.getElementById("addInput1").value.trim();
+    const word2 = document.getElementById("addInput2").value.trim();
+    const result = document.getElementById("addResult");
+
+    if (!word1 || !word2) {
+        result.textContent = "Both fields required.";
+        result.style.color = "red";
+        return;
+    }
+
+    if (direction === "engToGer") {
+        dictionary[word1.toLowerCase()] = word2;
+    } else {
+        dictionary[word2.toLowerCase()] = word1; // Reverse pair
+    }
+
+    rebuildReverseDict();
+    saveToLocalStorage();
+
+    result.textContent = `Added: ${word1} ↔ ${word2}`;
+    result.style.color = "green";
+
+    document.getElementById("addInput1").value = "";
+    document.getElementById("addInput2").value = "";
+}
+
+// ------------------------------------------------------
+// Remove entry (Two-way)
+// ------------------------------------------------------
+function removeEntry() {
+    const direction = document.getElementById("removeDirection").value;
+    const word = document.getElementById("removeInput").value.trim().toLowerCase();
+    const result = document.getElementById("removeResult");
+
+    if (direction === "eng") {
+        if (dictionary[word]) {
+            delete dictionary[word];
+        } else {
+            result.textContent = "No such English entry.";
+            result.style.color = "red";
+            return;
+        }
+    } else {
+        if (reverseDict[word]) {
+            const eng = reverseDict[word];
+            delete dictionary[eng];
+        } else {
+            result.textContent = "No such German entry.";
+            result.style.color = "red";
+            return;
+        }
+    }
+
+    rebuildReverseDict();
+    saveToLocalStorage();
+
+    result.textContent = `Entry removed: ${word}`;
+    result.style.color = "green";
+
+    document.getElementById("removeInput").value = "";
+}
+
+// ------------------------------------------------------
+// Download file
+// ------------------------------------------------------
+function downloadFile() {
+    let text = "";
+    for (const eng in dictionary) {
+        text += `${eng} - ${dictionary[eng]}\n`;
+    }
+
+    const blob = new Blob([text], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = loadedFilename;
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>
